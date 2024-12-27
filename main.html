@@ -169,7 +169,7 @@
                         <div class="ms-md-auto py-2 py-md-0">
                             <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
                             <a href="#" id="addCustomerBtn" class="btn btn-primary btn-round cursor-pointer text-white bg-purple-700 px-6 py-2 sm:py-3 text-sm font-semibold">
-                                Add Customer
+                                Add
                             </a>
                         </div>
                     </div>
@@ -371,10 +371,19 @@
             // Get the form and screen div
             const form = document.getElementById('competition-form');
             const screen = document.querySelector('.screen');
+            const button = document.getElementById('addCustomerBtn');
 
             // Toggle the 'hidden' class to show/hide the form and screen
             form.classList.toggle('hidden');
             screen.classList.toggle('hidden');
+
+            // Change the button text based on the form visibility
+            if (form.classList.contains('hidden')) {
+                button.textContent = 'Add'; // Show "Add" when form is hidden
+            } else {
+                button.textContent = 'Close'; // Change text to "Close" when form is visible
+        }
+            
         };
     </script>
     <!--   Core JS Files   -->
