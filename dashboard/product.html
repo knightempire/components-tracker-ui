@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link">
     <link rel="stylesheet" href="../assets/css/style-preset.css">
     <link rel="stylesheet" href="./css/main.css">
+
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -136,7 +137,7 @@
                                 </div>
                                 <div class="ms-2">
                                     <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
-                                    <p class="mb-0 opacity-50 text-sm">Total Revenue</p>
+                                    <p class="mb-0 opacity-50 text-md">Components Availability </p>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +156,7 @@
                                 </div>
                                 <div class="ms-2">
                                     <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
-                                    <p class="mb-0 opacity-50 text-sm">Total Revenue</p>
+                                    <p class="mb-0 opacity-50 text-md"> Components Out of stock </p>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +175,7 @@
                                 </div>
                                 <div class="ms-2">
                                     <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
-                                    <p class="mb-0 opacity-50 text-sm">Total Revenue</p>
+                                    <p class="mb-0 opacity-50 text-md">Components Damaged</p>
                                 </div>
                             </div>
                         </div>
@@ -194,6 +195,75 @@
 
                 <!-- [ sample-page ] end -->
             </div>
+
+            <div class="row mt-4">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                            <!-- Title and Search Bar within the same flex container -->
+                            <div class="flex w-full items-center sm:w-auto sm:mr-4">
+                                <!-- Title as a div (stays on the left) -->
+                                <div class="text-3xl font-bold sm:mr-4">Products list</div>
+                            </div>
+
+                            <!-- Search Bar (Stacked below on small screens) -->
+                            <div class="relative mt-0 sm:mt-0 sm:w-64 w-full">
+                                <!-- Feather Search Icon and Input -->
+                                <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                                <input type="search" class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-none focus:outline-none w-full" placeholder="Search here. . .">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+                                <thead class="bg-gradient-to-r from-blue-500 to-teal-400 text-white">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left font-medium text-sm uppercase tracking-wider">Product Name</th>
+                                        <th class="px-6 py-3 text-left font-medium text-sm uppercase tracking-wider">Availability</th>
+                                        <th class="px-6 py-3 text-left font-medium text-sm uppercase tracking-wider">Issued</th>
+                                        <th class="px-6 py-3 text-left font-medium text-sm uppercase tracking-wider">Damaged</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-blue-100 transition-colors duration-300">
+                                        <td class="px-6 py-4 border-b border-gray-200">Product 1</td>
+                                        <td class="px-6 py-4 border-b border-gray-200">50</td>
+                                        <td class="px-6 py-4 border-b border-gray-200">20</td>
+                                        <td class="px-6 py-4 border-b border-gray-200">5</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-100 transition-colors duration-300">
+                                        <td class="px-6 py-4 border-b border-gray-200">Product 2</td>
+                                        <td class="px-6 py-4 border-b border-gray-200">30</td>
+                                        <td class="px-6 py-4 border-b border-gray-200">15</td>
+                                        <td class="px-6 py-4 border-b border-gray-200">2</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-100 transition-colors duration-300">
+                                        <td class="px-6 py-4 border-b border-gray-200">Product 3</td>
+                                        <td class="px-6 py-4 border-b border-gray-200">70</td>
+                                        <td class="px-6 py-4 border-b border-gray-200">25</td>
+                                        <td class="px-6 py-4 border-b border-gray-200">8</td>
+                                    </tr>
+                                    <!-- More rows here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <!-- Include Feather Icons -->
+            <script src="https://unpkg.com/feather-icons"></script>
+            <script>
+                feather.replace(); // Initializes the Feather Icons
+            </script>
+
+
+
 
             <!-- [ Main Content ] end -->
         </div>
