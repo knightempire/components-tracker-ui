@@ -67,7 +67,15 @@
                             <span class="pc-mtext">Products</span>
                         </a>
                     </li>
+                    <li class="pc-item">
+                        <li class="pc-item pc-hasmenu">
+                            <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-note"></i></span><span class="pc-mtext">Issued </span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                            <ul class="pc-submenu">
+                                <li class="pc-item"><a class="pc-link" href="./issue.html">Issue</a></li>
+                                <li class="pc-item"><a class="pc-link" href="./pending.html">Pending</a></li>
 
+                            </ul>
+                        </li>
 
                 </ul>
 
@@ -231,10 +239,13 @@
                                                     Current Issued
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+                                                    damaged
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
                                                     Total count
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
-                                                    Total Issued
+                                                    no of times Issued
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
                                                     Actions
@@ -254,6 +265,10 @@
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md  text-gray-900" id="current_issued">
                                                     5
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_count">
+                                                    10
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_count">
