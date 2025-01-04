@@ -278,8 +278,9 @@
                                 <div class="relative sm:w-64 w-full">
                                     <!-- Feather Search Icon and Input -->
                                     <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-                                    <input type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search here...">
+                                    <input id="searchInput" type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search by Roll No or Name...">
                                 </div>
+
                             </div>
 
                             <div class="card-body">
@@ -733,63 +734,85 @@
                 let totalDamaged = 0;
 
                 const displayProductsTable = document.getElementById('displayproducts');
-                displayProductsTable.innerHTML = '';
+                displayProductsTable.innerHTML = ''; // Clear the table
 
-                data.products.forEach(product => {
-                    const row = document.createElement('tr');
+                // Create a reference to the search input element
+                const searchInput = document.getElementById('searchInput');
 
-                    const cellProductName = document.createElement('td');
-                    cellProductName.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                    cellProductName.textContent = product.product_name;
-                    row.appendChild(cellProductName);
+                // Filter products by product_name dynamically based on search input
+                searchInput.addEventListener('input', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const filteredProducts = data.products.filter(product => {
+                        return product.product_name.toLowerCase().includes(searchTerm); // Filter by product_name
+                    });
 
-                    const cellInCount = document.createElement('td');
-                    cellInCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                    cellInCount.textContent = product.in_count;
-                    row.appendChild(cellInCount);
+                    // Update the table with filtered products
+                    updateTable(filteredProducts);
+                });
 
-                    const cellOutCount = document.createElement('td');
-                    cellOutCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                    cellOutCount.textContent = product.out_count;
-                    row.appendChild(cellOutCount);
+                // Function to update the table with products
+                function updateTable(products) {
+                    displayProductsTable.innerHTML = ''; // Clear existing rows
 
-                    const cellDamageCount = document.createElement('td');
-                    cellDamageCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                    cellDamageCount.textContent = product.damage_count;
-                    row.appendChild(cellDamageCount);
+                    products.forEach(product => {
+                        const row = document.createElement('tr');
 
-                    const cellTotalCount = document.createElement('td');
-                    cellTotalCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                    const totalCount = product.in_count + product.out_count + product.damage_count;
-                    cellTotalCount.textContent = totalCount;
-                    row.appendChild(cellTotalCount);
+                        const cellProductName = document.createElement('td');
+                        cellProductName.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellProductName.textContent = product.product_name;
+                        row.appendChild(cellProductName);
 
-                    const cellIssuedCount = document.createElement('td');
-                    cellIssuedCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                    cellIssuedCount.textContent = product.issued_count;
-                    row.appendChild(cellIssuedCount);
+                        const cellInCount = document.createElement('td');
+                        cellInCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellInCount.textContent = product.in_count;
+                        row.appendChild(cellInCount);
 
-                    const cellActions = document.createElement('td');
-                    cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
-                    cellActions.innerHTML = `
+                        const cellOutCount = document.createElement('td');
+                        cellOutCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellOutCount.textContent = product.out_count;
+                        row.appendChild(cellOutCount);
+
+                        const cellDamageCount = document.createElement('td');
+                        cellDamageCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellDamageCount.textContent = product.damage_count;
+                        row.appendChild(cellDamageCount);
+
+                        const cellTotalCount = document.createElement('td');
+                        cellTotalCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        const totalCount = product.in_count + product.out_count + product.damage_count;
+                        cellTotalCount.textContent = totalCount;
+                        row.appendChild(cellTotalCount);
+
+                        const cellIssuedCount = document.createElement('td');
+                        cellIssuedCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellIssuedCount.textContent = product.issued_count;
+                        row.appendChild(cellIssuedCount);
+
+                        const cellActions = document.createElement('td');
+                        cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
+                        cellActions.innerHTML = `
                     <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
                     <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform(${product.product_id})">Update</button>
                 `;
-                    row.appendChild(cellActions);
+                        row.appendChild(cellActions);
 
-                    displayProductsTable.appendChild(row);
+                        displayProductsTable.appendChild(row);
 
-                    totalComponents += product.in_count + product.out_count;
-                    if (product.in_count === 0) {
-                        totalOutOfStock += 1;
-                    }
-                    totalDamaged += product.damage_count;
-                });
+                        totalComponents += product.in_count + product.out_count;
+                        if (product.in_count === 0) {
+                            totalOutOfStock += 1;
+                        }
+                        totalDamaged += product.damage_count;
+                    });
 
-                // Update the dashboard cards with totals
-                document.getElementById('displaytotalcomponents').textContent = `${totalComponents}`;
-                document.getElementById('displaytotaloutofstock').textContent = totalOutOfStock;
-                document.getElementById('displaytotaldamage').textContent = `${totalDamaged}`;
+                    // Update the dashboard cards with totals
+                    document.getElementById('displaytotalcomponents').textContent = `${totalComponents}`;
+                    document.getElementById('displaytotaloutofstock').textContent = totalOutOfStock;
+                    document.getElementById('displaytotaldamage').textContent = `${totalDamaged}`;
+                }
+
+                // Initially populate the table with all products
+                updateTable(data.products);
 
             } else {
                 const displayProductsTable = document.getElementById('displayproducts');
@@ -801,7 +824,6 @@
             displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">Failed to fetch products.</td></tr>';
         }
     }
-
 
     // Function to display products from /products-list API 
     async function displayupdateform(product_id) {

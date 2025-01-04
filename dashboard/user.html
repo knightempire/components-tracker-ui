@@ -280,8 +280,9 @@
                                 <div class="relative sm:w-64 w-full">
                                     <!-- Feather Search Icon and Input -->
                                     <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-                                    <input type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search here...">
+                                    <input id="searchInput" type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search by Roll No or Name...">
                                 </div>
+
                             </div>
 
                             <div class="card-body">
@@ -774,63 +775,81 @@
             const displayUsersTable = document.getElementById('displayusers');
             displayUsersTable.innerHTML = ''; // Clear the table before adding new rows
 
-            // Loop through the users data and create rows for each user
-            data.users.forEach(user => {
-                const row = document.createElement('tr');
-                row.classList.add('bg-white', 'divide-y', 'divide-gray-200');
+            // Create a reference to the search input element
+            const searchInput = document.getElementById('searchInput');
 
-                // Create cells for user details
-                const cellName = document.createElement('td');
-                cellName.classList.add('px-6', 'py-4', 'whitespace-nowrap');
-                cellName.innerHTML = `
+            // Filter users by roll_no or name dynamically based on search input
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filteredUsers = data.users.filter(user => {
+                    // Filter users by roll_no or name (case insensitive)
+                    return user.roll_no.toString().includes(searchTerm) || user.name.toLowerCase().includes(searchTerm);
+                });
+
+                // Update the table with filtered users
+                updateTable(filteredUsers);
+            });
+
+            // Function to update the table with filtered users
+            function updateTable(users) {
+                // Clear the table before adding new rows
+                displayUsersTable.innerHTML = '';
+
+                // Loop through the filtered users and create rows for each user
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.classList.add('bg-white', 'divide-y', 'divide-gray-200');
+
+                    // Create cells for user details
+                    const cellName = document.createElement('td');
+                    cellName.classList.add('px-6', 'py-4', 'whitespace-nowrap');
+                    cellName.innerHTML = `
                 <div class="flex items-center">
                     <div class="ml-4">
                         <div class="text-sm font-medium text-gray-900">${user.name}</div>
                         <div class="text-md text-gray-700">${user.roll_no}</div>
                     </div>
                 </div>
-            `;
-                row.appendChild(cellName);
+                `;
+                    row.appendChild(cellName);
 
-                // User type cell
-                const cellUserType = document.createElement('td');
-                cellUserType.classList.add('px-6', 'py-4', 'whitespace-nowrap');
+                    // User type cell
+                    const cellUserType = document.createElement('td');
+                    cellUserType.classList.add('px-6', 'py-4', 'whitespace-nowrap');
+                    let userType = '';
+                    let userTypeClass = '';
 
-                // Determine user type based on is_faculty field
-                let userType = '';
-                let userTypeClass = '';
+                    if (user.is_faculty === 0) {
+                        userType = 'Student';
+                        userTypeClass = 'bg-green-100 text-green-800'; // Green for Student
+                        countStudents++;
+                    } else if (user.is_faculty === 1) {
+                        userType = 'Faculty';
+                        userTypeClass = 'bg-blue-100 text-blue-800'; // Blue for Faculty
+                        countFaculty++;
+                    } else if (user.is_faculty === 2) {
+                        userType = 'Admin';
+                        userTypeClass = 'bg-purple-100 text-purple-800'; // Purple for Admin
+                        countAdmin++;
+                    }
 
-                if (user.is_faculty === 0) {
-                    userType = 'Student';
-                    userTypeClass = 'bg-green-100 text-green-800'; // Green for Student
-                    countStudents++; // Increment student count
-                } else if (user.is_faculty === 1) {
-                    userType = 'Faculty';
-                    userTypeClass = 'bg-blue-100 text-blue-800'; // Blue for Faculty
-                    countFaculty++; // Increment faculty count
-                } else if (user.is_faculty === 2) {
-                    userType = 'Admin';
-                    userTypeClass = 'bg-purple-100 text-purple-800'; // Purple for Admin
-                    countAdmin++; // Increment admin count
-                }
-
-                cellUserType.innerHTML = `
+                    cellUserType.innerHTML = `
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${userTypeClass}">
                     ${userType}
                 </span>
-            `;
-                row.appendChild(cellUserType);
+                `;
+                    row.appendChild(cellUserType);
 
-                // Phone number cell
-                const cellPhone = document.createElement('td');
-                cellPhone.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                cellPhone.textContent = user.phone;
-                row.appendChild(cellPhone);
+                    // Phone number cell
+                    const cellPhone = document.createElement('td');
+                    cellPhone.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                    cellPhone.textContent = user.phone;
+                    row.appendChild(cellPhone);
 
-                // Issue counts and components
-                const cellIssueDetails = document.createElement('td');
-                cellIssueDetails.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-500');
-                cellIssueDetails.innerHTML = `
+                    // Issue counts and components
+                    const cellIssueDetails = document.createElement('td');
+                    cellIssueDetails.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-500');
+                    cellIssueDetails.innerHTML = `
                 <div class="ml-4">
                     <div class="text-md font-medium text-gray-900">
                         Total no of Components issued: <span>${user.total_component_count}</span>
@@ -839,36 +858,39 @@
                         current components: <span>${user.total_component_count_not_returned}</span>
                     </div>
                 </div>
-            `;
-                row.appendChild(cellIssueDetails);
+                `;
+                    row.appendChild(cellIssueDetails);
 
-                // Total issue count cell
-                const cellTotalIssues = document.createElement('td');
-                cellTotalIssues.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                cellTotalIssues.textContent = user.total_issue_count;
-                row.appendChild(cellTotalIssues);
+                    // Total issue count cell
+                    const cellTotalIssues = document.createElement('td');
+                    cellTotalIssues.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                    cellTotalIssues.textContent = user.total_issue_count;
+                    row.appendChild(cellTotalIssues);
 
-                // Actions cell (View details and Update buttons)
-                const cellActions = document.createElement('td');
-                cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
-                cellActions.innerHTML = `
+                    // Actions cell (View details and Update buttons)
+                    const cellActions = document.createElement('td');
+                    cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
+                    cellActions.innerHTML = `
                 <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
                 <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform('${user.roll_no}')">Update</button>
-            `;
-                row.appendChild(cellActions);
+                `;
+                    row.appendChild(cellActions);
 
-                // Append the row to the table
-                displayUsersTable.appendChild(row);
-            });
+                    // Append the row to the table
+                    displayUsersTable.appendChild(row);
+                });
 
-            // Update the dashboard cards with the counts
-            document.getElementById('Totalstudent').textContent = `${countStudents} `;
-            document.getElementById('Totalfaculty').textContent = `${countFaculty} `;
-            document.getElementById('Totaladmin').textContent = `${countAdmin} `;
+                // Update the dashboard cards with the counts
+                document.getElementById('Totalstudent').textContent = `${countStudents} `;
+                document.getElementById('Totalfaculty').textContent = `${countFaculty} `;
+                document.getElementById('Totaladmin').textContent = `${countAdmin} `;
+            }
+
+            // Initially populate the table with all users
+            updateTable(data.users);
 
         } catch (error) {
             console.error('Error fetching user data:', error);
-            // Optionally show an error message in the UI if there's an issue fetching data
         }
     }
 
