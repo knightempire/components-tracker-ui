@@ -144,7 +144,7 @@
                                     <i class="text-primary ti ti-wallet"></i>
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <h4 class="mb-1" id="displaytotalcomponents">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
                                     <p class="mb-0 opacity-50 text-md">Components Availability </p>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                     <i class="text-warning ti ti-credit-card"></i>
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <h4 class="mb-1" id="displaytotaloutofstock">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
                                     <p class="mb-0 opacity-50 text-md"> Components Out of stock </p>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                                     <i class="text-success ti ti-wallet"></i>
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <h4 class="mb-1" id="displaytotaldamage">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
                                     <p class="mb-0 opacity-50 text-md">Components Damaged</p>
                                 </div>
                             </div>
@@ -512,7 +512,6 @@
 
 
                 function pageform(product_id) {
-                    // Log the product_id to the console when the form is opened
 
 
                     // Get the elements by their IDs
@@ -729,13 +728,15 @@
 
             if (data.success && Array.isArray(data.products)) {
 
+                let totalComponents = 0;
+                let totalOutOfStock = 0;
+                let totalDamaged = 0;
+
                 const displayProductsTable = document.getElementById('displayproducts');
                 displayProductsTable.innerHTML = '';
 
-
                 data.products.forEach(product => {
                     const row = document.createElement('tr');
-
 
                     const cellProductName = document.createElement('td');
                     cellProductName.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
@@ -759,7 +760,7 @@
 
                     const cellTotalCount = document.createElement('td');
                     cellTotalCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                    const totalCount = product.in_count + (product.out_count + product.damage_count);
+                    const totalCount = product.in_count + product.out_count + product.damage_count;
                     cellTotalCount.textContent = totalCount;
                     row.appendChild(cellTotalCount);
 
@@ -767,7 +768,6 @@
                     cellIssuedCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
                     cellIssuedCount.textContent = product.issued_count;
                     row.appendChild(cellIssuedCount);
-
 
                     const cellActions = document.createElement('td');
                     cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
@@ -777,22 +777,30 @@
                 `;
                     row.appendChild(cellActions);
 
-
                     displayProductsTable.appendChild(row);
-                });
-            } else {
 
+                    totalComponents += product.in_count + product.out_count;
+                    if (product.in_count === 0) {
+                        totalOutOfStock += 1;
+                    }
+                    totalDamaged += product.damage_count;
+                });
+
+                // Update the dashboard cards with totals
+                document.getElementById('displaytotalcomponents').textContent = `${totalComponents}`;
+                document.getElementById('displaytotaloutofstock').textContent = totalOutOfStock;
+                document.getElementById('displaytotaldamage').textContent = `${totalDamaged}`;
+
+            } else {
                 const displayProductsTable = document.getElementById('displayproducts');
                 displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">No products available</td></tr>';
             }
         } catch (error) {
             console.error("Error fetching products:", error);
-
             const displayProductsTable = document.getElementById('displayproducts');
             displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">Failed to fetch products.</td></tr>';
         }
     }
-
 
 
     // Function to display products from /products-list API 
