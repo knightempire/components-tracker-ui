@@ -146,8 +146,8 @@
                                     <i class="text-primary ti ti-wallet"></i>
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
-                                    <p class="mb-0 opacity-50 text-md">Components Availability </p>
+                                    <h4 class="mb-1" id="Totalstudent">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <p class="mb-0 opacity-50 text-md">Total student </p>
                                 </div>
                             </div>
                         </div>
@@ -165,8 +165,8 @@
                                     <i class="text-warning ti ti-credit-card"></i>
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
-                                    <p class="mb-0 opacity-50 text-md"> Components Out of stock </p>
+                                    <h4 class="mb-1" id="Totalfaculty">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <p class="mb-0 opacity-50 text-md"> Total faculty </p>
                                 </div>
                             </div>
                         </div>
@@ -184,8 +184,8 @@
                                     <i class="text-success ti ti-wallet"></i>
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
-                                    <p class="mb-0 opacity-50 text-md">Components Damaged</p>
+                                    <h4 class="mb-1" id="Totaladmin">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <p class="mb-0 opacity-50 text-md">Total admin</p>
                                 </div>
                             </div>
                         </div>
@@ -204,6 +204,65 @@
                 </div>
 
                 <!-- [ sample-page ] end -->
+            </div>
+
+            <div class="flex justify-center items-center hidden" id="msgok">
+                <div class="flex flex-col gap-2 w-60 sm:w-72 text-[10px] sm:text-xs z-50">
+                    <div class="success-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+                        <div class="flex gap-2">
+                            <div class="text-[#2b9875] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-white"> successfully :)</p>
+                                <p class="text-gray-500" id="Msg">Product added</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-600 text-gray-600 hover:bg-white/5 p-1 rounded-md transition-colors ease-linear">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center flex-col gap-2  text-[10px] hidden" id="msgfail">
+                <div class="error-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+                    <div class="flex gap-2">
+                        <div class="text-[#d65563] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-white">Please try again</p>
+                            <p class="text-gray-500" id="Msgerr">This is the description part</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-600 hover:bg-white/10 p-1 rounded-md transition-colors ease-linear">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-6 h-6"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 18 18 6M6 6l12 12"
+                          ></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <div class="mainscreen" id="mainscreen">
@@ -285,14 +344,14 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <div class="ml-4">
                                                         <div class="text-md font-medium text-gray-900">
-                                                            Components issue : <span id="components_issue"> 100</span>
+                                                            Components issue : <span id="total_component_count"> 100</span>
                                                         </div>
                                                         <div class="text-md text-gray-900">
-                                                            Total no of issue : <span id="total_components_issue"> 10</span>
+                                                            Total no of issue : <span id="total_component_count_not_returned"> 10</span>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_no_issue">
+                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_issue_count">
                                                     10
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -318,7 +377,7 @@
 
 
             <div class="form card mt-4 p-6 hidden" id="displaymainform">
-                <form id="addForm">
+                <form id="addForm" onsubmit="crateuser(event)">
                     <!-- Title -->
                     <div class="mt-6 md:mt-10 text-center font-bold text-3xl font-bold md:text-xl">Add Users</div>
 
@@ -339,20 +398,27 @@
                     <div class="flex flex-wrap -mx-4 mt-6">
                         <div class="w-full md:w-1/2 px-4 mt-4">
                             <label for="phone" class="block text-md font-semibold text-gray-700 mb-2">Phone No</label>
-                            <input type="text" id="newphone" name="newphone" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="number" id="newphone" name="newphone" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
 
                         <div class="w-full md:w-1/2 px-4 mt-4">
                             <label for="newuser_type" class="block text-md font-semibold text-gray-700 mb-2">User Type</label>
                             <select id="newuser_type" name="newuser_type" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                                 <option value="" disabled selected>Choose User Type</option>
-                                <option value="student">Student</option>
-                                <option value="faculty">Faculty</option>
-                                <option value="admin">Admin</option>
+                                <option value="0">Student</option>
+                                <option value="1">Faculty</option>
+                                <option value="2">Admin</option>
                             </select>
                         </div>
-
                     </div>
+
+                    <div class="flex flex-wrap -mx-4 mt-6">
+                        <div class="w-full md:w-1/2 px-4 mt-4">
+                            <label for="phone" class="block text-md font-semibold text-gray-700 mb-2">Email</label>
+                            <input type="text" id="newemail" name="newemail" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                        </div>
+                    </div>
+
 
 
 
@@ -367,7 +433,7 @@
 
 
             <div class="form card mt-4 p-6 hidden" id="pageform">
-                <form id="updateForm">
+                <form id="updateForm" onsubmit="updateuser(event)">
                     <!-- Close Button -->
                     <button type="button" onclick="pageform()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
@@ -384,12 +450,12 @@
                         <!-- Name and Roll No (1/2) -->
                         <div class="w-full md:w-1/2 px-4 mt-4">
                             <label for="name" class="block text-md font-semibold text-gray-700 mb-2">Name</label>
-                            <input type="text" id="name" name="name" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="text" id="updatename" name="name" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
 
                         <div class="w-full md:w-1/2 px-4 mt-4">
                             <label for="roll_no" class="block text-md font-semibold text-gray-700 mb-2">Roll No</label>
-                            <input type="text" id="roll_no" name="roll_no" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="text" id="updateroll_no" name="roll_no" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
                     </div>
 
@@ -398,39 +464,30 @@
 
                         <div class="w-full md:w-1/2 px-4 mt-4">
                             <label for="phone" class="block text-md font-semibold text-gray-700 mb-2">Phone No</label>
-                            <input type="text" id="phone" name="phone" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="text" id="updatephone" name="phone" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
 
                         <div class="w-full md:w-1/2 px-4 mt-4">
                             <label for="user_type" class="block text-md font-semibold text-gray-700 mb-2">User Type</label>
-                            <select id="user_type" name="user_type" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <select id="upadteuser_type" name="updateuser_type" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                                 <option value="" disabled selected>Choose User Type</option>
-                                <option value="student">Student</option>
-                                <option value="faculty">Faculty</option>
-                                <option value="admin">Admin</option>
+                                <option value="0">Student</option>
+                                <option value="1">Faculty</option>
+                                <option value="2">Admin</option>
                             </select>
                         </div>
 
+
                     </div>
 
-                    <!-- Total Components Issue, No of Issue, Current Issue (1/3) -->
+
                     <div class="flex flex-wrap -mx-4 mt-6">
-
-                        <div class="w-full md:w-1/3 px-4 mt-4">
-                            <label for="total_components_issue" class="block text-md font-semibold text-gray-700 mb-2">Total Components Issue</label>
-                            <input type="number" id="total_components_issue" name="total_components_issue" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
-                        </div>
-
-                        <div class="w-full md:w-1/3 px-4 mt-4">
-                            <label for="total_no_issue" class="block text-md font-semibold text-gray-700 mb-2">No of Issue</label>
-                            <input type="number" id="total_no_issue" name="total_no_issue" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
-                        </div>
-
-                        <div class="w-full md:w-1/3 px-4 mt-4">
-                            <label for="current_issue" class="block text-md font-semibold text-gray-700 mb-2">Current Issue</label>
-                            <input type="number" id="current_issue" name="current_issue" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                        <div class="w-full md:w-1/2 px-4 mt-4">
+                            <label for="phone" class="block text-md font-semibold text-gray-700 mb-2">Email</label>
+                            <input type="text" id="updateemail" name="updateemail" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
                     </div>
+
 
                     <!-- Submit Button -->
                     <br><br>
@@ -470,7 +527,7 @@
                 }
 
 
-                function pageform() {
+                function pageform(roll_no) {
                     // Get the elements by their IDs
                     var mainscreen = document.getElementById('mainscreen');
                     var pageform = document.getElementById('pageform');
@@ -480,6 +537,7 @@
                         // If mainscreen is hidden, show it and hide pageform
                         mainscreen.classList.add('hidden');
                         pageform.classList.remove('hidden');
+                        displayupdateuser(roll_no)
 
                     } else {
                         // If mainscreen is visible, hide it and show pageform
@@ -573,3 +631,374 @@
 <!-- [Body] end -->
 
 </html>
+
+<script>
+    document.getElementById('newuser_type').addEventListener('change', function() {
+
+        const userType = document.getElementById('newuser_type').value;
+        const rollNo = document.getElementById('newroll_no').value;
+        const emailField = document.getElementById('newemail');
+
+
+        if (userType === '0') {
+
+            if (rollNo) {
+                emailField.value = rollNo + '@cb.students.amrita.edu';
+            } else {
+                emailField.value = '';
+            }
+        } else {
+
+            emailField.value = '';
+        }
+    });
+
+
+    document.getElementById('newroll_no').addEventListener('input', function() {
+        const userType = document.getElementById('newuser_type').value;
+        const rollNo = document.getElementById('newroll_no').value;
+        const emailField = document.getElementById('newemail');
+
+        if (userType === '0' && rollNo) {
+            emailField.value = rollNo + '@cb.students.amrita.edu';
+        }
+    });
+
+
+
+
+    async function crateuser(event) {
+        event.preventDefault();
+
+        // Get form field values
+        const name = document.getElementById('newname').value;
+        const roll_no = document.getElementById('newroll_no').value;
+        const email = document.getElementById('newemail').value;
+        const phone = document.getElementById('newphone').value;
+        const user_type = document.getElementById('newuser_type').value;
+
+        // Print the values to the console
+        console.log('Name:', name);
+        console.log('Roll No:', roll_no);
+        console.log('Phone No:', phone);
+        console.log('User Type:', user_type);
+        console.log('Email:', email);
+
+        // Create the data object to send to the API
+        const userData = {
+            name: name,
+            roll_no: roll_no,
+            email: email,
+            phone_no: phone,
+            user_type: user_type
+        };
+
+        try {
+
+            const response = await fetch('http://localhost:3002/api/user/createuser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error: ${response.status} - ${errorMessage}`);
+            }
+
+
+            const data = await response.json();
+            console.log('Response from API:', data);
+            displayusers()
+            display();
+
+
+            const msgOkElement = document.getElementById('msgok');
+            const msgTextElement = document.getElementById('Msg');
+            msgTextElement.textContent = data.message || "user added";
+            msgOkElement.classList.remove('hidden');
+
+
+            setTimeout(() => {
+                msgOkElement.classList.add('hidden');
+            }, 3000);
+
+
+            document.getElementById('addForm').reset();
+
+
+        } catch (error) {
+            console.error("Error creating product:", error);
+            const msgfailElement = document.getElementById('msgfail');
+            const msgerrextElement = document.getElementById('Msgerr');
+
+            if (error.message.includes("409")) {
+                msgerrextElement.textContent = "user already exists.";
+            } else {
+                msgerrextElement.textContent = `Error: ${error.message}`;
+            }
+
+            msgfailElement.classList.remove('hidden');
+
+            setTimeout(() => {
+                msgfailElement.classList.add('hidden');
+            }, 3000);
+        }
+    }
+
+    async function displayusers() {
+        try {
+            const response = await fetch('http://localhost:3002/api/user/users-list', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+            console.log('Response from API:', data);
+
+            // Counters for each user type
+            let countStudents = 0;
+            let countFaculty = 0;
+            let countAdmin = 0;
+
+            // Get the table body where users will be displayed
+            const displayUsersTable = document.getElementById('displayusers');
+            displayUsersTable.innerHTML = ''; // Clear the table before adding new rows
+
+            // Loop through the users data and create rows for each user
+            data.users.forEach(user => {
+                const row = document.createElement('tr');
+                row.classList.add('bg-white', 'divide-y', 'divide-gray-200');
+
+                // Create cells for user details
+                const cellName = document.createElement('td');
+                cellName.classList.add('px-6', 'py-4', 'whitespace-nowrap');
+                cellName.innerHTML = `
+                <div class="flex items-center">
+                    <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">${user.name}</div>
+                        <div class="text-md text-gray-700">${user.roll_no}</div>
+                    </div>
+                </div>
+            `;
+                row.appendChild(cellName);
+
+                // User type cell
+                const cellUserType = document.createElement('td');
+                cellUserType.classList.add('px-6', 'py-4', 'whitespace-nowrap');
+
+                // Determine user type based on is_faculty field
+                let userType = '';
+                let userTypeClass = '';
+
+                if (user.is_faculty === 0) {
+                    userType = 'Student';
+                    userTypeClass = 'bg-green-100 text-green-800'; // Green for Student
+                    countStudents++; // Increment student count
+                } else if (user.is_faculty === 1) {
+                    userType = 'Faculty';
+                    userTypeClass = 'bg-blue-100 text-blue-800'; // Blue for Faculty
+                    countFaculty++; // Increment faculty count
+                } else if (user.is_faculty === 2) {
+                    userType = 'Admin';
+                    userTypeClass = 'bg-purple-100 text-purple-800'; // Purple for Admin
+                    countAdmin++; // Increment admin count
+                }
+
+                cellUserType.innerHTML = `
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${userTypeClass}">
+                    ${userType}
+                </span>
+            `;
+                row.appendChild(cellUserType);
+
+                // Phone number cell
+                const cellPhone = document.createElement('td');
+                cellPhone.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                cellPhone.textContent = user.phone;
+                row.appendChild(cellPhone);
+
+                // Issue counts and components
+                const cellIssueDetails = document.createElement('td');
+                cellIssueDetails.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-500');
+                cellIssueDetails.innerHTML = `
+                <div class="ml-4">
+                    <div class="text-md font-medium text-gray-900">
+                        Total no of Components issued: <span>${user.total_component_count}</span>
+                    </div>
+                    <div class="text-md text-gray-900">
+                        current components: <span>${user.total_component_count_not_returned}</span>
+                    </div>
+                </div>
+            `;
+                row.appendChild(cellIssueDetails);
+
+                // Total issue count cell
+                const cellTotalIssues = document.createElement('td');
+                cellTotalIssues.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                cellTotalIssues.textContent = user.total_issue_count;
+                row.appendChild(cellTotalIssues);
+
+                // Actions cell (View details and Update buttons)
+                const cellActions = document.createElement('td');
+                cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
+                cellActions.innerHTML = `
+                <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
+                <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform('${user.roll_no}')">Update</button>
+            `;
+                row.appendChild(cellActions);
+
+                // Append the row to the table
+                displayUsersTable.appendChild(row);
+            });
+
+            // Update the dashboard cards with the counts
+            document.getElementById('Totalstudent').textContent = `${countStudents} `;
+            document.getElementById('Totalfaculty').textContent = `${countFaculty} `;
+            document.getElementById('Totaladmin').textContent = `${countAdmin} `;
+
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            // Optionally show an error message in the UI if there's an issue fetching data
+        }
+    }
+
+
+    async function displayupdateuser(roll_no) {
+        console.log('Fetching user details for roll_no:', roll_no);
+
+        try {
+            const response = await fetch('http://localhost:3002/api/user/user-info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    roll_no: roll_no,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+
+                console.log('User data:', data.user);
+
+
+                document.getElementById('updatename').value = data.user.name || '';
+                document.getElementById('updateroll_no').value = data.user.roll_no || '';
+                document.getElementById('updatephone').value = data.user.phone || '';
+                document.getElementById('upadteuser_type').value = data.user.is_faculty || 0;
+
+                document.getElementById('updateemail').value = data.user.email || 0;
+
+
+
+            } else {
+                console.error('Failed to fetch user data:', data.message);
+                alert(data.message || 'Failed to fetch user data.');
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            alert('Error fetching user data.');
+        }
+    }
+
+    async function updateuser(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get form field values
+        const name = document.getElementById('updatename').value;
+        const roll_no = document.getElementById('updateroll_no').value;
+        const phone = document.getElementById('updatephone').value;
+        const user_type = document.getElementById('upadteuser_type').value;
+        const email = document.getElementById('updateemail').value;
+
+
+        // Print the form details to the console
+        console.log('Form Details:');
+        console.log('Name:', name);
+        console.log('Roll No:', roll_no);
+        console.log('Phone No:', phone);
+        console.log('User Type:', user_type);
+        // Create the data object to send to the API
+        const userData = {
+            name: name,
+            roll_no: roll_no,
+            email: email,
+            phone_no: phone,
+            user_type: user_type
+        };
+
+        try {
+
+            const response = await fetch('http://localhost:3002/api/user/update-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error: ${response.status} - ${errorMessage}`);
+            }
+
+
+            const data = await response.json();
+            console.log('Response from API:', data);
+            displayusers()
+            pageform();
+
+
+            const msgOkElement = document.getElementById('msgok');
+            const msgTextElement = document.getElementById('Msg');
+            msgTextElement.textContent = data.message || "user added";
+            msgOkElement.classList.remove('hidden');
+
+
+            setTimeout(() => {
+                msgOkElement.classList.add('hidden');
+            }, 3000);
+
+
+            document.getElementById('addForm').reset();
+
+
+        } catch (error) {
+            console.error("Error creating product:", error);
+            const msgfailElement = document.getElementById('msgfail');
+            const msgerrextElement = document.getElementById('Msgerr');
+
+            if (error.message.includes("409")) {
+                msgerrextElement.textContent = "user already exists.";
+            } else {
+                msgerrextElement.textContent = `Error: ${error.message}`;
+            }
+
+            msgfailElement.classList.remove('hidden');
+
+            setTimeout(() => {
+                msgfailElement.classList.add('hidden');
+            }, 3000);
+        }
+    }
+
+
+    displayusers()
+</script>
