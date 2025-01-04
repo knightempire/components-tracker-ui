@@ -204,6 +204,65 @@
                 <!-- [ sample-page ] end -->
             </div>
 
+            <div class="flex justify-center items-center hidden" id="msgok">
+                <div class="flex flex-col gap-2 w-60 sm:w-72 text-[10px] sm:text-xs z-50">
+                    <div class="success-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+                        <div class="flex gap-2">
+                            <div class="text-[#2b9875] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-white"> successfully :)</p>
+                                <p class="text-gray-500" id="Msg">Product added</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-600 text-gray-600 hover:bg-white/5 p-1 rounded-md transition-colors ease-linear">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center flex-col gap-2  text-[10px] hidden" id="msgfail">
+                <div class="error-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+                    <div class="flex gap-2">
+                        <div class="text-[#d65563] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-white">Please try again</p>
+                            <p class="text-gray-500" id="Msgerr">This is the description part</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-600 hover:bg-white/10 p-1 rounded-md transition-colors ease-linear">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-6 h-6"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 18 18 6M6 6l12 12"
+                          ></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
             <div class="mainscreen" id="mainscreen">
                 <div class="row mt-4">
                     <div class="col-xl-12">
@@ -255,28 +314,28 @@
 
                                         <tbody class="bg-white divide-y divide-gray-200" id="displayproducts">
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
+                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900">
+                                                    component name
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
+                                                    in_count
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md  text-gray-900" id="current_issued">
-                                                    5
+                                                    out_count
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="damage_count">
+                                                    damaged count
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_count">
-                                                    10
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_count">
-                                                    10
+                                                    total count
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_issued">
-                                                    5
+                                                    total_issued
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -300,7 +359,7 @@
 
 
             <div class="form card mt-4 p-6 hidden" id="displaymainform">
-                <form id="addForm">
+                <form id="addForm" onsubmit="createProduct()">
                     <div class="mt-6 md:mt-10 text-center font-bold text-3xl font-bold md:text-xl">Add Components</div>
 
                     <div class="flex flex-wrap -mx-4 mt-6">
@@ -342,8 +401,9 @@
 
 
 
+
             <div class="form card mt-4 p-6 hidden" id="pageform">
-                <form id="updateForm">
+                <form id="updateForm" onsubmit="updateProduct(event)">
                     <button type="button" onclick="pageform()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -355,9 +415,16 @@
 
                     <div class="flex flex-wrap -mx-4 mt-6">
 
+                        <div class="w-full md:w-1/2 px-4 mt-4 hidden">
+                            <label for="components" class="block text-md font-semibold text-gray-700 mb-2">Component Name</label>
+                            <input type="text" id="updatecomponentsid" name="components" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                        </div>
+
+
+
                         <div class="w-full md:w-1/2 px-4 mt-4">
                             <label for="components" class="block text-md font-semibold text-gray-700 mb-2">Component Name</label>
-                            <input type="text" id="components" name="components" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="text" id="updatecomponents" name="components" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
 
 
@@ -366,20 +433,20 @@
                             <div class="flex flex-wrap -mx-2">
 
                                 <div class="w-full md:w-1/3 px-2 mt-4">
-                                    <label for="totalAvailability" class="block text-md font-semibold text-gray-700 mb-2">Total Number of Availability</label>
-                                    <input type="text" id="totalAvailability" name="totalAvailability" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
+                                    <label for="totalAvailability" class="block text-md font-semibold text-gray-700 mb-2">Total Availability</label>
+                                    <input type="text" id="updatetotalAvailability" name="totalAvailability" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
                                 </div>
 
 
                                 <div class="w-full md:w-1/3 px-2 mt-4">
                                     <label for="totalIssue" class="block text-md font-semibold text-gray-700 mb-2">Total Issue</label>
-                                    <input type="text" id="totalIssue" name="totalIssue" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
+                                    <input type="text" id="updatetotalIssue" name="totalIssue" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
                                 </div>
 
 
                                 <div class="w-full md:w-1/3 px-2 mt-4">
                                     <label for="totalDamage" class="block text-md font-semibold text-gray-700 mb-2">Total Damage</label>
-                                    <input type="text" id="totalDamage" name="totalDamage" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
+                                    <input type="text" id="updatetotalDamage" name="totalDamage" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
                                 </div>
                             </div>
                         </div>
@@ -390,19 +457,19 @@
 
                         <div class="w-full md:w-1/3 px-4 mt-4">
                             <label for="availability" class="block text-md font-semibold text-gray-700 mb-2">Availability</label>
-                            <input type="number" id="availability" name="availability" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="number" id="updateavailability" name="availability" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
 
 
                         <div class="w-full md:w-1/3 px-4 mt-4">
                             <label for="damaged" class="block text-md font-semibold text-gray-700 mb-2">Damaged</label>
-                            <input type="number" id="damaged" name="damaged" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="number" id="updatedamaged" name="damaged" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
 
 
                         <div class="w-full md:w-1/3 px-4 mt-4">
                             <label for="total" class="block text-md font-semibold text-gray-700 mb-2">Total</label>
-                            <input type="text" id="total" name="total" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
+                            <input type="text" id="updatetotal" name="total" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
                         </div>
                     </div>
 
@@ -444,7 +511,10 @@
                 }
 
 
-                function pageform() {
+                function pageform(product_id) {
+                    // Log the product_id to the console when the form is opened
+
+
                     // Get the elements by their IDs
                     var mainscreen = document.getElementById('mainscreen');
                     var pageform = document.getElementById('pageform');
@@ -454,7 +524,7 @@
                         // If mainscreen is hidden, show it and hide pageform
                         mainscreen.classList.add('hidden');
                         pageform.classList.remove('hidden');
-
+                        displayupdateform(product_id);
                     } else {
                         // If mainscreen is visible, hide it and show pageform
                         mainscreen.classList.remove('hidden');
@@ -547,3 +617,320 @@
 <!-- [Body] end -->
 
 </html>
+
+
+
+<script>
+    displayProducts()
+
+    //function of total adding a proudct
+    function updateTotal() {
+        const availability = parseInt(document.getElementById('newAvailability').value) || 0;
+        const damaged = parseInt(document.getElementById('newDamaged').value) || 0;
+        const issuedCount = parseInt(document.getElementById('newIssuedCount').value) || 0;
+
+        const total = availability + damaged + issuedCount;
+        document.getElementById('newtotal').value = total;
+    }
+
+
+    document.getElementById('newAvailability').addEventListener('input', updateTotal);
+    document.getElementById('newDamaged').addEventListener('input', updateTotal);
+    document.getElementById('newIssuedCount').addEventListener('input', updateTotal);
+
+
+    document.getElementById('addForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        updateTotal();
+    });
+
+
+
+    //add product
+    async function createProduct() {
+        const formData = {
+            product_name: document.getElementById('newComponents').value,
+            in_count: parseInt(document.getElementById('newAvailability').value) || 0,
+            out_count: parseInt(document.getElementById('newIssuedCount').value) || 0,
+            damage_count: parseInt(document.getElementById('newDamaged').value) || 0,
+        };
+
+        try {
+            const response = await fetch(`http://localhost:3002/api/product/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+            console.log(data);
+
+            displayProducts()
+            display();
+
+
+            const msgOkElement = document.getElementById('msgok');
+            const msgTextElement = document.getElementById('Msg');
+            msgTextElement.textContent = data.message || "Product added";
+            msgOkElement.classList.remove('hidden');
+
+
+            setTimeout(() => {
+                msgOkElement.classList.add('hidden');
+            }, 3000);
+
+
+            document.getElementById('addForm').reset();
+            updateTotal();
+
+        } catch (error) {
+            console.error("Error creating product:", error);
+            const msgfailElement = document.getElementById('msgfail');
+            const msgerrextElement = document.getElementById('Msgerr');
+
+            if (error.message.includes("409")) {
+                msgerrextElement.textContent = "This component already exists.";
+            } else {
+                msgerrextElement.textContent = `Error: ${error.message}`;
+            }
+
+            msgfailElement.classList.remove('hidden');
+
+            setTimeout(() => {
+                msgfailElement.classList.add('hidden');
+            }, 3000);
+        }
+    }
+
+
+    // Function to display products from /products-list API
+    async function displayProducts() {
+        try {
+            const response = await fetch('http://localhost:3002/api/product/products-list', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success && Array.isArray(data.products)) {
+
+                const displayProductsTable = document.getElementById('displayproducts');
+                displayProductsTable.innerHTML = '';
+
+
+                data.products.forEach(product => {
+                    const row = document.createElement('tr');
+
+
+                    const cellProductName = document.createElement('td');
+                    cellProductName.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                    cellProductName.textContent = product.product_name;
+                    row.appendChild(cellProductName);
+
+                    const cellInCount = document.createElement('td');
+                    cellInCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                    cellInCount.textContent = product.in_count;
+                    row.appendChild(cellInCount);
+
+                    const cellOutCount = document.createElement('td');
+                    cellOutCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                    cellOutCount.textContent = product.out_count;
+                    row.appendChild(cellOutCount);
+
+                    const cellDamageCount = document.createElement('td');
+                    cellDamageCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                    cellDamageCount.textContent = product.damage_count;
+                    row.appendChild(cellDamageCount);
+
+                    const cellTotalCount = document.createElement('td');
+                    cellTotalCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                    const totalCount = product.in_count + (product.out_count + product.damage_count);
+                    cellTotalCount.textContent = totalCount;
+                    row.appendChild(cellTotalCount);
+
+                    const cellIssuedCount = document.createElement('td');
+                    cellIssuedCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                    cellIssuedCount.textContent = product.issued_count;
+                    row.appendChild(cellIssuedCount);
+
+
+                    const cellActions = document.createElement('td');
+                    cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
+                    cellActions.innerHTML = `
+                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
+                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform(${product.product_id})">Update</button>
+                `;
+                    row.appendChild(cellActions);
+
+
+                    displayProductsTable.appendChild(row);
+                });
+            } else {
+
+                const displayProductsTable = document.getElementById('displayproducts');
+                displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">No products available</td></tr>';
+            }
+        } catch (error) {
+            console.error("Error fetching products:", error);
+
+            const displayProductsTable = document.getElementById('displayproducts');
+            displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">Failed to fetch products.</td></tr>';
+        }
+    }
+
+
+
+    // Function to display products from /products-list API 
+    async function displayupdateform(product_id) {
+        console.log('Fetching data for product ID:', product_id);
+
+        try {
+
+            const response = await fetch('http://localhost:3002/api/product/product-info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    p_id: product_id,
+                }),
+            });
+
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+            console.log('Product data:', data);
+
+
+            if (data.success) {
+                document.getElementById('updatecomponentsid').value = data.product.product_id;
+                document.getElementById('updatecomponents').value = data.product.product_name;
+                document.getElementById('updatetotalAvailability').value = data.product.in_count;
+                document.getElementById('updatetotalIssue').value = data.product.issued_count;
+                document.getElementById('updatetotalDamage').value = data.product.damage_count;
+
+
+                updatenewTotal();
+            } else {
+                console.error('Error:', data.message);
+            }
+
+        } catch (error) {
+
+            console.error('Error fetching product info:', error);
+        }
+    }
+
+    // Calculate the total - updateproduct
+    function updatenewTotal() {
+        const availability = parseInt(document.getElementById('updatetotalAvailability').value) || 0;
+        const damaged = parseInt(document.getElementById('updatetotalIssue').value) || 0;
+        const issuedCount = parseInt(document.getElementById('updatetotalDamage').value) || 0;
+        const updateavailablityCount = parseInt(document.getElementById('updateavailability').value) || 0;
+        const updatedamagedCount = parseInt(document.getElementById('updatedamaged').value) || 0;
+        const total = availability + damaged + issuedCount + updatedamagedCount + updateavailablityCount;
+        document.getElementById('updatetotal').value = total;
+    }
+
+
+    document.getElementById('updateavailability').addEventListener('input', updatenewTotal);
+    document.getElementById('updatedamaged').addEventListener('input', updatenewTotal);
+
+
+    document.getElementById('updateForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        updatenewTotal();
+    });
+
+
+
+    //api to updateproduct
+    async function updateProduct(event) {
+        event.preventDefault();
+
+
+        const updateavailability = document.getElementById('updateavailability').value;
+        const updatedamaged = document.getElementById('updatedamaged').value;
+        const p_id = document.getElementById('updatecomponentsid').value;
+
+        // Print the values to the console
+        console.log('updateavailability:', updateavailability);
+        console.log('updatedamaged:', updatedamaged);
+        console.log('p_id:', p_id);
+
+
+        const updateData = {
+            p_id,
+            new_in_count: updateavailability,
+            new_damaged_count: updatedamaged,
+        };
+
+        try {
+
+            const response = await fetch('http://localhost:3002/api/product/update-stock', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updateData),
+            });
+
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+
+            const data = await response.json();
+            console.log('Stock updated successfully:', data);
+
+
+            const msgOkElement = document.getElementById('msgok');
+            const msgTextElement = document.getElementById('Msg');
+            msgTextElement.textContent = data.message || "Stock updated successfully";
+            msgOkElement.classList.remove('hidden');
+
+            pageform();
+            displayProducts()
+            updatenewTotal();
+            document.getElementById('updateForm').reset();
+
+            setTimeout(() => {
+                msgOkElement.classList.add('hidden');
+            }, 3000);
+
+        } catch (error) {
+
+            console.error("Error updating stock:", error);
+            const msgfailElement = document.getElementById('msgfail');
+            const msgerrextElement = document.getElementById('Msgerr');
+            msgerrextElement.textContent = `Error: ${error.message}`;
+
+            msgfailElement.classList.remove('hidden');
+
+            setTimeout(() => {
+                msgfailElement.classList.add('hidden');
+            }, 3000);
+        }
+    }
+</script>
