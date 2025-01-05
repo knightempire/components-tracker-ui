@@ -67,7 +67,15 @@
                             <span class="pc-mtext">Products</span>
                         </a>
                     </li>
+                    <li class="pc-item">
+                        <li class="pc-item pc-hasmenu">
+                            <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-note"></i></span><span class="pc-mtext">Issued </span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                            <ul class="pc-submenu">
+                                <li class="pc-item"><a class="pc-link" href="./issue.html">Issue</a></li>
+                                <li class="pc-item"><a class="pc-link" href="./pending.html">Pending</a></li>
 
+                            </ul>
+                        </li>
 
                 </ul>
 
@@ -136,7 +144,7 @@
                                     <i class="text-primary ti ti-wallet"></i>
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <h4 class="mb-1" id="displaytotalcomponents">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
                                     <p class="mb-0 opacity-50 text-md">Components Availability </p>
                                 </div>
                             </div>
@@ -155,7 +163,7 @@
                                     <i class="text-warning ti ti-credit-card"></i>
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <h4 class="mb-1" id="displaytotaloutofstock">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
                                     <p class="mb-0 opacity-50 text-md"> Components Out of stock </p>
                                 </div>
                             </div>
@@ -174,7 +182,7 @@
                                     <i class="text-success ti ti-wallet"></i>
                                 </div>
                                 <div class="ms-2">
-                                    <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <h4 class="mb-1" id="displaytotaldamage">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
                                     <p class="mb-0 opacity-50 text-md">Components Damaged</p>
                                 </div>
                             </div>
@@ -196,6 +204,65 @@
                 <!-- [ sample-page ] end -->
             </div>
 
+            <div class="flex justify-center items-center hidden" id="msgok">
+                <div class="flex flex-col gap-2 w-60 sm:w-72 text-[10px] sm:text-xs z-50">
+                    <div class="success-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+                        <div class="flex gap-2">
+                            <div class="text-[#2b9875] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-white"> successfully :)</p>
+                                <p class="text-gray-500" id="Msg">Product added</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-600 text-gray-600 hover:bg-white/5 p-1 rounded-md transition-colors ease-linear">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center flex-col gap-2  text-[10px] hidden" id="msgfail">
+                <div class="error-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+                    <div class="flex gap-2">
+                        <div class="text-[#d65563] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-white">Please try again</p>
+                            <p class="text-gray-500" id="Msgerr">This is the description part</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-600 hover:bg-white/10 p-1 rounded-md transition-colors ease-linear">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-6 h-6"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 18 18 6M6 6l12 12"
+                          ></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
             <div class="mainscreen" id="mainscreen">
                 <div class="row mt-4">
                     <div class="col-xl-12">
@@ -211,8 +278,9 @@
                                 <div class="relative sm:w-64 w-full">
                                     <!-- Feather Search Icon and Input -->
                                     <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-                                    <input type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search here...">
+                                    <input id="searchInput" type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search by Roll No or Name...">
                                 </div>
+
                             </div>
 
                             <div class="card-body">
@@ -247,28 +315,28 @@
 
                                         <tbody class="bg-white divide-y divide-gray-200" id="displayproducts">
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
+                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900">
+                                                    component name
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
+                                                    in_count
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md  text-gray-900" id="current_issued">
-                                                    5
+                                                    out_count
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="damage_count">
+                                                    damaged count
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_count">
-                                                    10
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_count">
-                                                    10
+                                                    total count
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="total_issued">
-                                                    5
+                                                    total_issued
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -292,7 +360,7 @@
 
 
             <div class="form card mt-4 p-6 hidden" id="displaymainform">
-                <form id="addForm">
+                <form id="addForm" onsubmit="createProduct()">
                     <div class="mt-6 md:mt-10 text-center font-bold text-3xl font-bold md:text-xl">Add Components</div>
 
                     <div class="flex flex-wrap -mx-4 mt-6">
@@ -334,8 +402,9 @@
 
 
 
+
             <div class="form card mt-4 p-6 hidden" id="pageform">
-                <form id="updateForm">
+                <form id="updateForm" onsubmit="updateProduct(event)">
                     <button type="button" onclick="pageform()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -347,9 +416,16 @@
 
                     <div class="flex flex-wrap -mx-4 mt-6">
 
+                        <div class="w-full md:w-1/2 px-4 mt-4 hidden">
+                            <label for="components" class="block text-md font-semibold text-gray-700 mb-2">Component Name</label>
+                            <input type="text" id="updatecomponentsid" name="components" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                        </div>
+
+
+
                         <div class="w-full md:w-1/2 px-4 mt-4">
                             <label for="components" class="block text-md font-semibold text-gray-700 mb-2">Component Name</label>
-                            <input type="text" id="components" name="components" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="text" id="updatecomponents" name="components" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
 
 
@@ -358,20 +434,20 @@
                             <div class="flex flex-wrap -mx-2">
 
                                 <div class="w-full md:w-1/3 px-2 mt-4">
-                                    <label for="totalAvailability" class="block text-md font-semibold text-gray-700 mb-2">Total Number of Availability</label>
-                                    <input type="text" id="totalAvailability" name="totalAvailability" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
+                                    <label for="totalAvailability" class="block text-md font-semibold text-gray-700 mb-2">Total Availability</label>
+                                    <input type="text" id="updatetotalAvailability" name="totalAvailability" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
                                 </div>
 
 
                                 <div class="w-full md:w-1/3 px-2 mt-4">
                                     <label for="totalIssue" class="block text-md font-semibold text-gray-700 mb-2">Total Issue</label>
-                                    <input type="text" id="totalIssue" name="totalIssue" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
+                                    <input type="text" id="updatetotalIssue" name="totalIssue" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
                                 </div>
 
 
                                 <div class="w-full md:w-1/3 px-2 mt-4">
                                     <label for="totalDamage" class="block text-md font-semibold text-gray-700 mb-2">Total Damage</label>
-                                    <input type="text" id="totalDamage" name="totalDamage" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
+                                    <input type="text" id="updatetotalDamage" name="totalDamage" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
                                 </div>
                             </div>
                         </div>
@@ -382,19 +458,19 @@
 
                         <div class="w-full md:w-1/3 px-4 mt-4">
                             <label for="availability" class="block text-md font-semibold text-gray-700 mb-2">Availability</label>
-                            <input type="number" id="availability" name="availability" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="number" id="updateavailability" name="availability" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
 
 
                         <div class="w-full md:w-1/3 px-4 mt-4">
                             <label for="damaged" class="block text-md font-semibold text-gray-700 mb-2">Damaged</label>
-                            <input type="number" id="damaged" name="damaged" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                            <input type="number" id="updatedamaged" name="damaged" class="mt-2 block w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                         </div>
 
 
                         <div class="w-full md:w-1/3 px-4 mt-4">
                             <label for="total" class="block text-md font-semibold text-gray-700 mb-2">Total</label>
-                            <input type="text" id="total" name="total" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
+                            <input type="text" id="updatetotal" name="total" class="mt-2 block w-full px-4 py-2 border border-gray-500 rounded-lg bg-gray-100 cursor-not-allowed" value="0" readonly>
                         </div>
                     </div>
 
@@ -436,7 +512,9 @@
                 }
 
 
-                function pageform() {
+                function pageform(product_id) {
+
+
                     // Get the elements by their IDs
                     var mainscreen = document.getElementById('mainscreen');
                     var pageform = document.getElementById('pageform');
@@ -446,7 +524,7 @@
                         // If mainscreen is hidden, show it and hide pageform
                         mainscreen.classList.add('hidden');
                         pageform.classList.remove('hidden');
-
+                        displayupdateform(product_id);
                     } else {
                         // If mainscreen is visible, hide it and show pageform
                         mainscreen.classList.remove('hidden');
@@ -539,3 +617,125 @@
 <!-- [Body] end -->
 
 </html>
+
+
+
+<script>
+    displayProducts()
+
+
+    // Function to display products from /products-list API
+    async function displayProducts() {
+        try {
+            const response = await fetch('http://localhost:3002/api/product/products-list', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success && Array.isArray(data.products)) {
+
+                let totalComponents = 0;
+                let totalOutOfStock = 0;
+                let totalDamaged = 0;
+
+                const displayProductsTable = document.getElementById('displayproducts');
+                displayProductsTable.innerHTML = ''; // Clear the table
+
+                // Create a reference to the search input element
+                const searchInput = document.getElementById('searchInput');
+
+                // Filter products by product_name dynamically based on search input
+                searchInput.addEventListener('input', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const filteredProducts = data.products.filter(product => {
+                        return product.product_name.toLowerCase().includes(searchTerm); // Filter by product_name
+                    });
+
+                    // Update the table with filtered products
+                    updateTable(filteredProducts);
+                });
+
+                // Function to update the table with products
+                function updateTable(products) {
+                    displayProductsTable.innerHTML = ''; // Clear existing rows
+
+                    products.forEach(product => {
+                        const row = document.createElement('tr');
+
+                        const cellProductName = document.createElement('td');
+                        cellProductName.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellProductName.textContent = product.product_name;
+                        row.appendChild(cellProductName);
+
+                        const cellInCount = document.createElement('td');
+                        cellInCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellInCount.textContent = product.in_count;
+                        row.appendChild(cellInCount);
+
+                        const cellOutCount = document.createElement('td');
+                        cellOutCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellOutCount.textContent = product.out_count;
+                        row.appendChild(cellOutCount);
+
+                        const cellDamageCount = document.createElement('td');
+                        cellDamageCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellDamageCount.textContent = product.damage_count;
+                        row.appendChild(cellDamageCount);
+
+                        const cellTotalCount = document.createElement('td');
+                        cellTotalCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        const totalCount = product.in_count + product.out_count + product.damage_count;
+                        cellTotalCount.textContent = totalCount;
+                        row.appendChild(cellTotalCount);
+
+                        const cellIssuedCount = document.createElement('td');
+                        cellIssuedCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellIssuedCount.textContent = product.issued_count;
+                        row.appendChild(cellIssuedCount);
+
+                        const cellActions = document.createElement('td');
+                        cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
+                        cellActions.innerHTML = `
+                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
+                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform(${product.product_id})">Update</button>
+                `;
+                        row.appendChild(cellActions);
+
+                        displayProductsTable.appendChild(row);
+
+                        totalComponents += product.in_count + product.out_count;
+                        if (product.in_count === 0) {
+                            totalOutOfStock += 1;
+                        }
+                        totalDamaged += product.damage_count;
+                    });
+
+                    // Update the dashboard cards with totals
+                    document.getElementById('displaytotalcomponents').textContent = `${totalComponents}`;
+                    document.getElementById('displaytotaloutofstock').textContent = totalOutOfStock;
+                    document.getElementById('displaytotaldamage').textContent = `${totalDamaged}`;
+                }
+
+                // Initially populate the table with all products
+                updateTable(data.products);
+
+            } else {
+                const displayProductsTable = document.getElementById('displayproducts');
+                displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">No products available</td></tr>';
+            }
+        } catch (error) {
+            console.error("Error fetching products:", error);
+            const displayProductsTable = document.getElementById('displayproducts');
+            displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">Failed to fetch products.</td></tr>';
+        }
+    }
+</script>
