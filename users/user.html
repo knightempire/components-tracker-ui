@@ -173,7 +173,24 @@
                     </div>
                 </div>
 
-
+                <!-- Card 3 -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="card dashnum-card dashnum-card-small overflow-hidden">
+                        <span class="round bg-success small"></span>
+                        <span class="round bg-success big"></span>
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="avtar avtar-lg bg-light-success">
+                                    <i class="text-success ti ti-wallet"></i>
+                                </div>
+                                <div class="ms-2">
+                                    <h4 class="mb-1" id="Totaladmin">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <p class="mb-0 opacity-50 text-md">Total admin</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Two buttons in the rightmost end -->
                 <div class="col-xl-3 col-md-3 ms-auto d-flex justify-content-end align-items-center gap-3">
@@ -283,9 +300,9 @@
                                                 <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
                                                     User type
                                                 </th>
-                                                <!-- <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
                                                     Phone
-                                                </th> -->
+                                                </th>
 
                                                 <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
                                                     comppoents
@@ -391,7 +408,7 @@
                                 <option value="" disabled selected>Choose User Type</option>
                                 <option value="0">Student</option>
                                 <option value="1">Faculty</option>
-                         
+                             
                             </select>
                         </div>
                     </div>
@@ -457,7 +474,7 @@
                                 <option value="" disabled selected>Choose User Type</option>
                                 <option value="0">Student</option>
                                 <option value="1">Faculty</option>
-                          
+                                <option value="2">Admin</option>
                             </select>
                         </div>
 
@@ -824,10 +841,10 @@
                     row.appendChild(cellUserType);
 
                     // Phone number cell
-                    // const cellPhone = document.createElement('td');
-                    // cellPhone.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
-                    // cellPhone.textContent = user.phone;
-                    // row.appendChild(cellPhone);
+                    const cellPhone = document.createElement('td');
+                    cellPhone.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                    cellPhone.textContent = user.phone;
+                    row.appendChild(cellPhone);
 
                     // Issue counts and components
                     const cellIssueDetails = document.createElement('td');
@@ -854,7 +871,8 @@
                     const cellActions = document.createElement('td');
                     cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
                     cellActions.innerHTML = `
-                <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none  onclick="pageform('${user.roll_no}')">View details</button>
+                <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
+                <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform('${user.roll_no}')">Update</button>
                 `;
                     row.appendChild(cellActions);
 
@@ -865,7 +883,7 @@
                 // Update the dashboard cards with the counts
                 document.getElementById('Totalstudent').textContent = `${countStudents} `;
                 document.getElementById('Totalfaculty').textContent = `${countFaculty} `;
-
+                document.getElementById('Totaladmin').textContent = `${countAdmin} `;
             }
 
             // Initially populate the table with all users
@@ -877,6 +895,131 @@
     }
 
 
+    async function displayupdateuser(roll_no) {
+        console.log('Fetching user details for roll_no:', roll_no);
+
+        try {
+            const response = await fetch('http://localhost:3002/api/user/user-info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    roll_no: roll_no,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+
+                console.log('User data:', data.user);
+
+
+                document.getElementById('updatename').value = data.user.name || '';
+                document.getElementById('updateroll_no').value = data.user.roll_no || '';
+                document.getElementById('updatephone').value = data.user.phone || '';
+                document.getElementById('upadteuser_type').value = data.user.is_faculty || 0;
+
+                document.getElementById('updateemail').value = data.user.email || 0;
+
+
+
+            } else {
+                console.error('Failed to fetch user data:', data.message);
+                alert(data.message || 'Failed to fetch user data.');
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            alert('Error fetching user data.');
+        }
+    }
+
+    async function updateuser(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get form field values
+        const name = document.getElementById('updatename').value;
+        const roll_no = document.getElementById('updateroll_no').value;
+        const phone = document.getElementById('updatephone').value;
+        const user_type = document.getElementById('upadteuser_type').value;
+        const email = document.getElementById('updateemail').value;
+
+
+        // Print the form details to the console
+        console.log('Form Details:');
+        console.log('Name:', name);
+        console.log('Roll No:', roll_no);
+        console.log('Phone No:', phone);
+        console.log('User Type:', user_type);
+        // Create the data object to send to the API
+        const userData = {
+            name: name,
+            roll_no: roll_no,
+            email: email,
+            phone_no: phone,
+            user_type: user_type
+        };
+
+        try {
+
+            const response = await fetch('http://localhost:3002/api/user/update-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error: ${response.status} - ${errorMessage}`);
+            }
+
+
+            const data = await response.json();
+            console.log('Response from API:', data);
+            displayusers()
+            pageform();
+
+
+            const msgOkElement = document.getElementById('msgok');
+            const msgTextElement = document.getElementById('Msg');
+            msgTextElement.textContent = data.message || "user added";
+            msgOkElement.classList.remove('hidden');
+
+
+            setTimeout(() => {
+                msgOkElement.classList.add('hidden');
+            }, 3000);
+
+
+            document.getElementById('addForm').reset();
+
+
+        } catch (error) {
+            console.error("Error creating product:", error);
+            const msgfailElement = document.getElementById('msgfail');
+            const msgerrextElement = document.getElementById('Msgerr');
+
+            if (error.message.includes("409")) {
+                msgerrextElement.textContent = "user already exists.";
+            } else {
+                msgerrextElement.textContent = `Error: ${error.message}`;
+            }
+
+            msgfailElement.classList.remove('hidden');
+
+            setTimeout(() => {
+                msgfailElement.classList.add('hidden');
+            }, 3000);
+        }
+    }
 
 
     displayusers()

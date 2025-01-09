@@ -623,6 +623,92 @@
 <script>
     displayProducts()
 
+    //function of total adding a proudct
+    function updateTotal() {
+        const availability = parseInt(document.getElementById('newAvailability').value) || 0;
+        const damaged = parseInt(document.getElementById('newDamaged').value) || 0;
+        const issuedCount = parseInt(document.getElementById('newIssuedCount').value) || 0;
+
+        const total = availability + damaged + issuedCount;
+        document.getElementById('newtotal').value = total;
+    }
+
+
+    document.getElementById('newAvailability').addEventListener('input', updateTotal);
+    document.getElementById('newDamaged').addEventListener('input', updateTotal);
+    document.getElementById('newIssuedCount').addEventListener('input', updateTotal);
+
+
+    document.getElementById('addForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        updateTotal();
+    });
+
+
+
+    //add product
+    async function createProduct() {
+        const formData = {
+            product_name: document.getElementById('newComponents').value,
+            in_count: parseInt(document.getElementById('newAvailability').value) || 0,
+            out_count: parseInt(document.getElementById('newIssuedCount').value) || 0,
+            damage_count: parseInt(document.getElementById('newDamaged').value) || 0,
+        };
+
+        try {
+            const response = await fetch(`http://localhost:3002/api/product/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+            console.log(data);
+
+            displayProducts()
+            display();
+
+
+            const msgOkElement = document.getElementById('msgok');
+            const msgTextElement = document.getElementById('Msg');
+            msgTextElement.textContent = data.message || "Product added";
+            msgOkElement.classList.remove('hidden');
+
+
+            setTimeout(() => {
+                msgOkElement.classList.add('hidden');
+            }, 3000);
+
+
+            document.getElementById('addForm').reset();
+            updateTotal();
+
+        } catch (error) {
+            console.error("Error creating product:", error);
+            const msgfailElement = document.getElementById('msgfail');
+            const msgerrextElement = document.getElementById('Msgerr');
+
+            if (error.message.includes("409")) {
+                msgerrextElement.textContent = "This component already exists.";
+            } else {
+                msgerrextElement.textContent = `Error: ${error.message}`;
+            }
+
+            msgfailElement.classList.remove('hidden');
+
+            setTimeout(() => {
+                msgfailElement.classList.add('hidden');
+            }, 3000);
+        }
+    }
+
 
     // Function to display products from /products-list API
     async function displayProducts() {
@@ -736,6 +822,145 @@
             console.error("Error fetching products:", error);
             const displayProductsTable = document.getElementById('displayproducts');
             displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">Failed to fetch products.</td></tr>';
+        }
+    }
+
+    // Function to display products from /products-list API 
+    async function displayupdateform(product_id) {
+        console.log('Fetching data for product ID:', product_id);
+
+        try {
+
+            const response = await fetch('http://localhost:3002/api/product/product-info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    p_id: product_id,
+                }),
+            });
+
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+            console.log('Product data:', data);
+
+
+            if (data.success) {
+                document.getElementById('updatecomponentsid').value = data.product.product_id;
+                document.getElementById('updatecomponents').value = data.product.product_name;
+                document.getElementById('updatetotalAvailability').value = data.product.in_count;
+                document.getElementById('updatetotalIssue').value = data.product.issued_count;
+                document.getElementById('updatetotalDamage').value = data.product.damage_count;
+
+
+                updatenewTotal();
+            } else {
+                console.error('Error:', data.message);
+            }
+
+        } catch (error) {
+
+            console.error('Error fetching product info:', error);
+        }
+    }
+
+    // Calculate the total - updateproduct
+    function updatenewTotal() {
+        const availability = parseInt(document.getElementById('updatetotalAvailability').value) || 0;
+        const damaged = parseInt(document.getElementById('updatetotalIssue').value) || 0;
+        const issuedCount = parseInt(document.getElementById('updatetotalDamage').value) || 0;
+        const updateavailablityCount = parseInt(document.getElementById('updateavailability').value) || 0;
+        const updatedamagedCount = parseInt(document.getElementById('updatedamaged').value) || 0;
+        const total = availability + damaged + issuedCount + updatedamagedCount + updateavailablityCount;
+        document.getElementById('updatetotal').value = total;
+    }
+
+
+    document.getElementById('updateavailability').addEventListener('input', updatenewTotal);
+    document.getElementById('updatedamaged').addEventListener('input', updatenewTotal);
+
+
+    document.getElementById('updateForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        updatenewTotal();
+    });
+
+
+
+    //api to updateproduct
+    async function updateProduct(event) {
+        event.preventDefault();
+
+
+        const updateavailability = document.getElementById('updateavailability').value;
+        const updatedamaged = document.getElementById('updatedamaged').value;
+        const p_id = document.getElementById('updatecomponentsid').value;
+
+        // Print the values to the console
+        console.log('updateavailability:', updateavailability);
+        console.log('updatedamaged:', updatedamaged);
+        console.log('p_id:', p_id);
+
+
+        const updateData = {
+            p_id,
+            new_in_count: updateavailability,
+            new_damaged_count: updatedamaged,
+        };
+
+        try {
+
+            const response = await fetch('http://localhost:3002/api/product/update-stock', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updateData),
+            });
+
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+
+            const data = await response.json();
+            console.log('Stock updated successfully:', data);
+
+
+            const msgOkElement = document.getElementById('msgok');
+            const msgTextElement = document.getElementById('Msg');
+            msgTextElement.textContent = data.message || "Stock updated successfully";
+            msgOkElement.classList.remove('hidden');
+
+            pageform();
+            displayProducts()
+            updatenewTotal();
+            document.getElementById('updateForm').reset();
+
+            setTimeout(() => {
+                msgOkElement.classList.add('hidden');
+            }, 3000);
+
+        } catch (error) {
+
+            console.error("Error updating stock:", error);
+            const msgfailElement = document.getElementById('msgfail');
+            const msgerrextElement = document.getElementById('Msgerr');
+            msgerrextElement.textContent = `Error: ${error.message}`;
+
+            msgfailElement.classList.remove('hidden');
+
+            setTimeout(() => {
+                msgfailElement.classList.add('hidden');
+            }, 3000);
         }
     }
 </script>
