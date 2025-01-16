@@ -23,10 +23,8 @@
     <!-- [Template CSS Files] -->
     <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link">
     <link rel="stylesheet" href="../assets/css/style-preset.css">
-
     <link rel="stylesheet" href="./css/main.css">
-
-
+    <script src="./js/main.js"></script>
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -52,7 +50,7 @@
                 <ul class="pc-navbar">
 
                     <li class="pc-item">
-                        <a href="../dashboard/index.html" class="pc-link"><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span
+                        <a href="./index.html" class="pc-link"><span class="pc-micon"><i class="ti ti-dashboard"></i></span><span
               class="pc-mtext">Default</span></a>
                     </li>
 
@@ -64,9 +62,9 @@
                         </a>
                     </li>
                     <li class="pc-item">
-                        <a href="./product.html" class="pc-link">
+                        <a href="./orders.html" class="pc-link">
                             <span class="pc-micon"><i class="ti ti-tool"></i></span>
-                            <span class="pc-mtext">Products</span>
+                            <span class="pc-mtext">Orders</span>
                         </a>
                     </li>
 
@@ -126,331 +124,153 @@
 
             <div class="row">
                 <!-- [ sample-page ] start -->
-                <div class="col-xl-4 col-md-6">
-                    <div class="card bg-secondary-dark dashnum-card text-white overflow-hidden">
-                        <span class="round small"></span>
-                        <span class="round big"></span>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avtar avtar-lg">
-                                        <i class="text-white ti ti-credit-card"></i>
-                                    </div>
+
+                <!-- Card 1 -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="card dashnum-card dashnum-card-small overflow-hidden">
+                        <span class="round bg-primary small"></span>
+                        <span class="round bg-primary big"></span>
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="avtar avtar-lg bg-light-primary">
+                                    <i class="text-primary ti ti-wallet"></i>
                                 </div>
-                                <div class="col-auto">
-                                    <div class="btn-group">
-                                        <a href="#" class="avtar bg-secondary dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="ti ti-dots"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><button class="dropdown-item">Import Card</button></li>
-                                            <li><button class="dropdown-item">Export</button></li>
-                                        </ul>
-                                    </div>
+                                <div class="ms-2">
+                                    <h4 class="mb-1" id="displaytotalcomponents">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <p class="mb-0 opacity-50 text-md">Components Availability </p>
                                 </div>
                             </div>
-                            <span class="text-white d-block f-34 f-w-500 my-2">1350 <i class="ti ti-arrow-up-right-circle opacity-50"></i></span>
-                            <p class="mb-0 opacity-50">Total Pending Orders</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="card bg-primary-dark dashnum-card text-white overflow-hidden">
-                        <span class="round small"></span>
-                        <span class="round big"></span>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avtar avtar-lg">
-                                        <i class="text-white ti ti-credit-card"></i>
-                                    </div>
+
+                <!-- Card 2 -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="card dashnum-card dashnum-card-small overflow-hidden">
+                        <span class="round bg-warning small"></span>
+                        <span class="round bg-warning big"></span>
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="avtar avtar-lg bg-light-warning">
+                                    <i class="text-warning ti ti-credit-card"></i>
                                 </div>
-                                <div class="col-auto">
-                                    <ul class="nav nav-pills justify-content-end mb-0" id="chart-tab-tab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link text-white active" id="chart-tab-home-tab" data-bs-toggle="pill" data-bs-target="#chart-tab-home" role="tab" aria-controls="chart-tab-home" aria-selected="true">Month</button
-                      >
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <button
-                        class="nav-link text-white"
-                        id="chart-tab-profile-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#chart-tab-profile"
-                        role="tab"
-                        aria-controls="chart-tab-profile"
-                        aria-selected="false"
-                        >Year</button
-                      >
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="tab-content" id="chart-tab-tabContent">
-                <div class="tab-pane show active" id="chart-tab-home" role="tabpanel" aria-labelledby="chart-tab-home-tab" tabindex="0">
-                  <div class="row">
-                    <div class="col-6">
-                      <span class="text-white d-block f-34 f-w-500 my-2">$1305 <i class="ti ti-arrow-up-right-circle opacity-50"></i></span>
-                      <p class="mb-0 opacity-50">Total Issue</p>
-                    </div>
-                    <div class="col-6">
-                      <div id="tab-chart-1"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane" id="chart-tab-profile" role="tabpanel" aria-labelledby="chart-tab-profile-tab" tabindex="0">
-                  <div class="row">
-                    <div class="col-6">
-                      <span class="text-white d-block f-34 f-w-500 my-2">$29961 <i class="ti ti-arrow-down-right-circle opacity-50"></i></span>
-                      <p class="mb-0 opacity-50">Total issue in  Year</p>
-                    </div>
-                    <div class="col-6">
-                      <div id="tab-chart-2"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-12">
-          <div class="card bg-primary-dark dashnum-card dashnum-card-small text-white overflow-hidden">
-            <span class="round bg-primary small"></span>
-            <span class="round bg-primary big"></span>
-            <div class="card-body p-3">
-              <div class="d-flex align-items-center">
-                <div class="avtar avtar-lg">
-                  <i class="text-white ti ti-credit-card"></i>
-                </div>
-                <div class="ms-2">
-                  <h4 class="text-white mb-1">$203k <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
-                  <p class="mb-0 opacity-50 text-sm">Net Profit</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card dashnum-card dashnum-card-small overflow-hidden">
-            <span class="round bg-warning small"></span>
-            <span class="round bg-warning big"></span>
-            <div class="card-body p-3">
-              <div class="d-flex align-items-center">
-                <div class="avtar avtar-lg bg-light-warning">
-                  <i class="text-warning ti ti-credit-card"></i>
-                </div>
-                <div class="ms-2">
-                  <h4 class="mb-1">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
-                  <p class="mb-0 opacity-50 text-sm">Total Revenue</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      
-
-        <!-- [ sample-page ] end -->
-      </div>
-
-      <div class="mainscreen" id="mainscreen">
-        <div class="row mt-4">
-            <div class="col-xl-8">
-                <div class="card">
-                    <div class="card-header flex flex-col sm:flex-row sm:justify-between sm:items-center">
-                        <!-- Title and Search Bar within the same flex container -->
-                        <div class="flex w-full items-center sm:w-auto sm:mr-4">
-                            <!-- Title as a div (stays on the left) -->
-                            <div class="text-3xl font-bold sm:mr-4">Products list</div>
-                        </div>
-
-                        <!-- Search Bar (Stacked below on small screens) -->
-                        <div class="relative sm:w-64 w-full">
-                            <!-- Feather Search Icon and Input -->
-                            <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-                            <input type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search here...">
+                                <div class="ms-2">
+                                    <h4 class="mb-1" id="displaytotaloutofstock">$550K <i class="ti ti-arrow-up-right-circle opacity-50"></i></h4>
+                                    <p class="mb-0 opacity-50 text-md"> Components Out of stock </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card-body">
-                        <!-- Add a wrapper div to make the table scrollable on smaller screens -->
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-blue-100">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
-                                            Name
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
-                                            Availabe
-                                        </th>
-                         
-                                        <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </thead>
 
-                                <tbody class="bg-white divide-y divide-gray-200" id="displayproducts">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                            987654321
-                                        </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                            Available
-                                        </td>
 
-                                       
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                                            <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform()">Update</button>
+                <!-- [ sample-page ] end -->
+            </div>
 
-                                            </td>
-                                            </tr>
+            <div class="flex justify-center items-center hidden" id="msgok">
+                <div class="flex flex-col gap-2 w-60 sm:w-72 text-[10px] sm:text-xs z-50">
+                    <div class="success-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+                        <div class="flex gap-2">
+                            <div class="text-[#2b9875] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-white"> successfully :)</p>
+                                <p class="text-gray-500" id="Msg">Product added</p>
+                            </div>
+                        </div>
+                        <button class="text-gray-600 text-gray-600 hover:bg-white/5 p-1 rounded-md transition-colors ease-linear">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
+            <div class="flex justify-center items-center flex-col gap-2  text-[10px] hidden" id="msgfail">
+                <div class="error-alert cursor-default flex items-center justify-between w-full h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+                    <div class="flex gap-2">
+                        <div class="text-[#d65563] bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-white">Please try again</p>
+                            <p class="text-gray-500" id="Msgerr">This is the description part</p>
+                        </div>
+                    </div>
+                    <button class="text-gray-600 hover:bg-white/10 p-1 rounded-md transition-colors ease-linear">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-6 h-6"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 18 18 6M6 6l12 12"
+                          ></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mainscreen" id="mainscreen">
+                <div class="row mt-4">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                                <!-- Title and Search Bar within the same flex container -->
+                                <div class="flex w-full items-center sm:w-auto sm:mr-4">
+                                    <!-- Title as a div (stays on the left) -->
+                                    <div class="text-3xl font-bold sm:mr-4">Products list</div>
+                                </div>
+
+                                <!-- Search Bar (Stacked below on small screens) -->
+                                <div class="relative sm:w-64 w-full">
+                                    <!-- Feather Search Icon and Input -->
+                                    <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                                    <input id="searchInput" type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search by Roll No or Name...">
+                                </div>
+
+                            </div>
+
+                            <div class="card-body">
+                                <!-- Add a wrapper div to make the table scrollable on smaller screens -->
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-blue-100">
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
-                                                </td>
+                                                <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+                                                    Name
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+                                                    Availability
+                                                </th>
 
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                                                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform()">Update</button>
-
-                                                </td>
+                                                <th scope="col" class="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+                                                    Actions
+                                                </th>
                                             </tr>
+                                        </thead>
 
+                                        <tbody class="bg-white divide-y divide-gray-200" id="displayproducts">
 
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                                                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform()">Update</button>
-
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                                                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform()">Update</button>
-
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                                                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform()">Update</button>
-
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                                                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform()">Update</button>
-
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                                                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform()">Update</button>
-
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                                                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform()">Update</button>
-
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="phone">
-                                                    987654321
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-md text-gray-900" id="availability">
-                                                    Available
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                                                    <button class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-600 transition duration-300 focus:outline-none" onclick="pageform()">Update</button>
-
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                            </table>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 
@@ -461,6 +281,23 @@
 
 
             </div>
+
+
+
+
+
+
+
+
+
+            <!-- Include Feather Icons -->
+            <script src="https://unpkg.com/feather-icons"></script>
+            <script>
+                feather.replace(); // Initializes the Feather Icons
+            </script>
+
+
+
 
             <!-- [ Main Content ] end -->
         </div>
@@ -537,3 +374,178 @@
 <!-- [Body] end -->
 
 </html>
+
+
+
+<script>
+    displayProducts()
+
+
+    // Function to display products from /products-list API
+    async function displayProducts() {
+        try {
+            const response = await fetch('http://localhost:3002/api/product/products-list', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success && Array.isArray(data.products)) {
+
+                let totalComponents = 0;
+                let totalOutOfStock = 0;
+                let totalDamaged = 0;
+
+                const displayProductsTable = document.getElementById('displayproducts');
+                displayProductsTable.innerHTML = ''; // Clear the table
+
+                // Create a reference to the search input element
+                const searchInput = document.getElementById('searchInput');
+
+                // Filter products by product_name dynamically based on search input
+                searchInput.addEventListener('input', () => {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const filteredProducts = data.products.filter(product => {
+                        return product.product_name.toLowerCase().includes(searchTerm); // Filter by product_name
+                    });
+
+                    // Update the table with filtered products
+                    updateTable(filteredProducts);
+                });
+
+                // Function to update the table with products
+                function updateTable(products) {
+                    displayProductsTable.innerHTML = ''; // Clear existing rows
+
+                    products.forEach((product, index) => {
+                        const row = document.createElement('tr');
+
+                        // Product Name Cell
+                        const cellProductName = document.createElement('td');
+                        cellProductName.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellProductName.textContent = product.product_name;
+                        row.appendChild(cellProductName);
+
+                        // In Count Cell
+                        const cellInCount = document.createElement('td');
+                        cellInCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
+                        cellInCount.textContent = product.in_count;
+                        row.appendChild(cellInCount);
+
+                        // Initialize quantity and track added status
+                        let quantity = 0; // Initially set quantity to 0
+                        let isAdded = false; // Track whether the item is added
+
+                        // Action Buttons Cell
+                        const cellActions = document.createElement('td');
+                        cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
+                        cellActions.style.width = "300px"; // Ensure consistent width for all rows
+
+                        cellActions.innerHTML = `
+            <div class="flex items-center space-x-2">
+                <div id="add-button-container-${index}" class="flex justify-start">
+                    <!-- Initially display the Add button -->
+                    <button
+                        onClick="handleAdd(${index})"
+                        id="add-button-${index}"
+                        class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-400"
+                    >
+                        Add
+                    </button>
+                </div>
+                <div id="quantity-display-${index}" class="hidden flex items-center space-x-2">
+                    <!-- Quantity controls -->
+                    <button
+                        onClick="handleQuantityChange(${index}, 'decrement')"
+                        id="decrement-button-${index}"
+                        class="text-sm text-white bg-blue-400 px-4 py-2 rounded-md hover:bg-blue-500"
+                    >
+                        -
+                    </button>
+                    <span id="quantity-${index}" class="text-lg text-gray-900 font-semibold">1</span>
+                    <button
+                        onClick="handleQuantityChange(${index}, 'increment')"
+                        id="increment-button-${index}"
+                        class="text-sm text-white bg-blue-400 px-4 py-2 rounded-md hover:bg-blue-500"
+                    >
+                        +
+                    </button>
+                </div>
+            </div>
+        `;
+                        row.appendChild(cellActions);
+
+                        // Append row to the table
+                        displayProductsTable.appendChild(row);
+
+                        // Update totals
+                        totalComponents += product.in_count + product.out_count;
+                        if (product.in_count === 0) {
+                            totalOutOfStock += 1;
+                        }
+                        totalDamaged += product.damage_count;
+                    });
+
+                    // Update the dashboard cards with totals
+                    document.getElementById('displaytotalcomponents').textContent = `${totalComponents}`;
+                    document.getElementById('displaytotaloutofstock').textContent = totalOutOfStock;
+                }
+
+                // Function to handle the Add button click
+                window.handleAdd = (index) => {
+                    const addButton = document.querySelector(`#add-button-${index}`);
+                    const quantityDisplay = document.querySelector(`#quantity-display-${index}`);
+
+                    // Change Add button to Increment and Decrement buttons, and set quantity to 1
+                    addButton.classList.add('hidden');
+                    quantityDisplay.classList.remove('hidden');
+
+                    // Set the quantity to 1 initially when Add is clicked
+                    document.querySelector(`#quantity-${index}`).textContent = '1';
+                };
+
+                // Function to handle Increment and Decrement button clicks
+                window.handleQuantityChange = (index, action) => {
+                    const quantityDisplay = document.querySelector(`#quantity-display-${index}`);
+                    const quantitySpan = document.querySelector(`#quantity-${index}`);
+                    let currentQuantity = parseInt(quantitySpan.textContent, 10);
+
+                    if (action === 'increment') {
+                        currentQuantity++;
+                    } else if (action === 'decrement') {
+                        currentQuantity--;
+                    }
+
+                    // Update the displayed quantity
+                    quantitySpan.textContent = currentQuantity;
+
+                    // If the quantity reaches 0, show the Add button again
+                    if (currentQuantity === 0) {
+                        const addButton = document.querySelector(`#add-button-${index}`);
+                        addButton.classList.remove('hidden');
+                        quantityDisplay.classList.add('hidden');
+                    }
+                };
+
+                // Initially populate the table with all products
+                updateTable(data.products);
+
+            } else {
+                const displayProductsTable = document.getElementById('displayproducts');
+                displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">No products available</td></tr>';
+            }
+        } catch (error) {
+            console.error("Error fetching products:", error);
+            const displayProductsTable = document.getElementById('displayproducts');
+            displayProductsTable.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">Failed to fetch products.</td></tr>';
+        }
+    }
+</script>
