@@ -433,29 +433,68 @@
                 function updateTable(products) {
                     displayProductsTable.innerHTML = ''; // Clear existing rows
 
-                    products.forEach(product => {
+                    products.forEach((product, index) => {
                         const row = document.createElement('tr');
 
+                        // Product Name Cell
                         const cellProductName = document.createElement('td');
                         cellProductName.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
                         cellProductName.textContent = product.product_name;
                         row.appendChild(cellProductName);
 
+                        // In Count Cell
                         const cellInCount = document.createElement('td');
                         cellInCount.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-md', 'text-gray-900');
                         cellInCount.textContent = product.in_count;
                         row.appendChild(cellInCount);
 
+                        // Initialize quantity and track added status
+                        let quantity = 0; // Initially set quantity to 0
+                        let isAdded = false; // Track whether the item is added
 
+                        // Action Buttons Cell
                         const cellActions = document.createElement('td');
                         cellActions.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'font-medium');
+                        cellActions.style.width = "300px"; // Ensure consistent width for all rows
+
                         cellActions.innerHTML = `
-                    <button class="px-4 py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 transition duration-300 focus:outline-none">View details</button>
-                `;
+            <div class="flex items-center space-x-2">
+                <div id="add-button-container-${index}" class="flex justify-start">
+                    <!-- Initially display the Add button -->
+                    <button
+                        onClick="handleAdd(${index})"
+                        id="add-button-${index}"
+                        class="px-4 py-2 bg-purple-500 text-white font-bold rounded-md hover:bg-purple-400"
+                    >
+                        Add
+                    </button>
+                </div>
+                <div id="quantity-display-${index}" class="hidden flex items-center space-x-2">
+                    <!-- Quantity controls -->
+                    <button
+                        onClick="handleQuantityChange(${index}, 'decrement')"
+                        id="decrement-button-${index}"
+                        class="text-sm text-white bg-blue-400 px-4 py-2 rounded-md hover:bg-blue-500"
+                    >
+                        -
+                    </button>
+                    <span id="quantity-${index}" class="text-lg text-gray-900 font-semibold">1</span>
+                    <button
+                        onClick="handleQuantityChange(${index}, 'increment')"
+                        id="increment-button-${index}"
+                        class="text-sm text-white bg-blue-400 px-4 py-2 rounded-md hover:bg-blue-500"
+                    >
+                        +
+                    </button>
+                </div>
+            </div>
+        `;
                         row.appendChild(cellActions);
 
+                        // Append row to the table
                         displayProductsTable.appendChild(row);
 
+                        // Update totals
                         totalComponents += product.in_count + product.out_count;
                         if (product.in_count === 0) {
                             totalOutOfStock += 1;
@@ -467,6 +506,42 @@
                     document.getElementById('displaytotalcomponents').textContent = `${totalComponents}`;
                     document.getElementById('displaytotaloutofstock').textContent = totalOutOfStock;
                 }
+
+                // Function to handle the Add button click
+                window.handleAdd = (index) => {
+                    const addButton = document.querySelector(`#add-button-${index}`);
+                    const quantityDisplay = document.querySelector(`#quantity-display-${index}`);
+
+                    // Change Add button to Increment and Decrement buttons, and set quantity to 1
+                    addButton.classList.add('hidden');
+                    quantityDisplay.classList.remove('hidden');
+
+                    // Set the quantity to 1 initially when Add is clicked
+                    document.querySelector(`#quantity-${index}`).textContent = '1';
+                };
+
+                // Function to handle Increment and Decrement button clicks
+                window.handleQuantityChange = (index, action) => {
+                    const quantityDisplay = document.querySelector(`#quantity-display-${index}`);
+                    const quantitySpan = document.querySelector(`#quantity-${index}`);
+                    let currentQuantity = parseInt(quantitySpan.textContent, 10);
+
+                    if (action === 'increment') {
+                        currentQuantity++;
+                    } else if (action === 'decrement') {
+                        currentQuantity--;
+                    }
+
+                    // Update the displayed quantity
+                    quantitySpan.textContent = currentQuantity;
+
+                    // If the quantity reaches 0, show the Add button again
+                    if (currentQuantity === 0) {
+                        const addButton = document.querySelector(`#add-button-${index}`);
+                        addButton.classList.remove('hidden');
+                        quantityDisplay.classList.add('hidden');
+                    }
+                };
 
                 // Initially populate the table with all products
                 updateTable(data.products);
