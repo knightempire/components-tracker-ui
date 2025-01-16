@@ -678,7 +678,7 @@
                 // Clear the table before adding new rows
                 displayUsersTable.innerHTML = '';
 
-                // Loop through the filtered users and create rows for each user
+
                 users.forEach(user => {
                     const row = document.createElement('tr');
                     row.classList.add('bg-white', 'divide-y', 'divide-gray-200');
@@ -696,7 +696,6 @@
                 `;
                     row.appendChild(cellName);
 
-                    // User type cell
                     const cellUserType = document.createElement('td');
                     cellUserType.classList.add('px-6', 'py-4', 'whitespace-nowrap');
                     let userType = '';
