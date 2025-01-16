@@ -513,8 +513,6 @@
 
 
 
-    <script src="../assets/js/plugins/apexcharts.min.js"></script>
-    <script src="../assets/js/pages/dashboard-default.js"></script>
 
 </body>
 
@@ -581,7 +579,7 @@
 
         try {
 
-            const response = await fetch('http://localhost:3002/api/user/createuser', {
+            const response = await fetch('http://localhost:3002/api/userpage/adduser', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -636,7 +634,7 @@
 
     async function displayusers() {
         try {
-            const response = await fetch('http://localhost:3002/api/user/users-list', {
+            const response = await fetch('http://localhost:3002/api/userpage/user-list', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
