@@ -739,25 +739,23 @@
 
         const cartItems = Object.values(params);
 
-        // Log the cart items array to the console
         console.log('Cart Items:', cartItems);
     }
 
 
 
     function dispaycard() {
-        // Get the elements by their IDs
+
         var main = document.getElementById('main');
         var dispaycard = document.getElementById('dispaycard');
 
-        // Toggle visibility of the elements
         if (dispaycard.classList.contains('hidden')) {
-            // If mainscreen is hidden, show it and hide pageform
+
             main.classList.add('hidden');
             dispaycard.classList.remove('hidden');
 
         } else {
-            // If mainscreen is visible, hide it and show pageform
+
             main.classList.remove('hidden');
             dispaycard.classList.add('hidden');
         }
