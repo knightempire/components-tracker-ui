@@ -328,11 +328,11 @@
 
                             <div class="flex flex-col">
                                 <label class="font-semibold text-gray-700">requesting date:</label>
-                                <div id="name" class="mt-1 text-gray-600">01/01/2025</div>
+                                <div id="req_time" class="mt-1 text-gray-600">01/01/2025</div>
                             </div>
                             <div class="flex flex-col">
                                 <label class="font-semibold text-gray-700">Expires Date:</label>
-                                <div id="roll_no" class="mt-1 text-gray-600">01/02/2025</div>
+                                <div id="exp_time" class="mt-1 text-gray-600">01/02/2025</div>
                             </div>
 
 
@@ -385,10 +385,10 @@
                             <div class="flex flex-col">
                                 <label class="font-semibold text-gray-700">Roll no</label>
                                 <div class="flex items-center">
-                                    <input type="text" id="roll_no" class="p-2 border rounded text-gray-600 w-2/3" placeholder="Enter Roll No">
-                                    <button type="submit" class="cursor-pointer rounded-lg bg-sky-400 px-6 py-2 sm:py-3 text-md font-semibold text-white ml-4" id="checkuser">Check user</button>
+                                    <input type="text" id="check_roll_no" class="p-2 border rounded text-gray-600 w-2/3" placeholder="Enter Roll No">
+                                    <button type="button" class="cursor-pointer rounded-lg bg-sky-400 px-6 py-2 sm:py-3 text-md font-semibold text-white ml-4" id="checkuser" onclick="checkrollno()">Check user</button>
                                 </div>
-                                <div id="name" class="mt-1 text-left text-red-600">error display</div>
+                                <div id="errorname" class="mt-1 text-left text-red-600"></div>
                             </div>
 
                             <br>
@@ -397,22 +397,22 @@
                             <div class="flex flex-col userdetails ">
                             </div>
 
-                            <div class="flex flex-col userdetails ">
+                            <div class="flex flex-col userdetails hidden" id="userNameDiv">
                                 <label class="font-semibold text-gray-700">Name</label>
-                                <div id="name" class="mt-1 text-gray-600">01/01/2025</div>
+                                <div id="display_name" class="mt-1 text-gray-600"></div>
                             </div>
-                            <div class="flex flex-col userdetails ">
+                            <div class="flex flex-col userdetails hidden" id="userPhoneDiv">
                                 <label class="font-semibold text-gray-700">Phone</label>
-                                <div id="roll_no" class="mt-1 text-gray-600">01/02/2025</div>
+                                <div id="display_roll_no" class="mt-1 text-gray-600"></div>
                             </div>
-                            <div class="flex flex-col userdetails ">
-                                <label class="font-semibold text-gray-700">user type</label>
-                                <div id="name" class="mt-1 text-gray-600">student</div>
+                            <div class="flex flex-col userdetails hidden" id="userFacultyDiv">
+                                <label class="font-semibold text-gray-700">User Type</label>
+                                <div id="display_faculty" class="mt-1 text-gray-600"></div>
                             </div>
 
 
-                            <div class="flex items-center">
-                                <input type="checkbox" id="acknowledgment" class="mr-2">
+                            <div class="flex items-center hidden" id="acknowledgmentDiv">
+                                <input type="checkbox" id="acknowledgment" class="mr-2" required>
                                 <label for="acknowledgment" class="text-gray-700">Acknowledgment</label>
                             </div>
 
@@ -420,15 +420,13 @@
                         <!-- Edit, Save, Back Buttons -->
                         <br>
                         <div class="text-center mt-6">
-
-
-                            <button type="submit" class="cursor-pointer rounded-lg  bg-purple-600 px-6 py-2 sm:py-3 text-md font-semibold text-white mr-4" id="saveButton">Save</button>
+                            <button type="button" class="cursor-pointer rounded-lg bg-purple-600 px-6 py-2 sm:py-3 text-md font-semibold text-white mr-4" id="saveButton" onclick="submitForm()">Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
 
-
+            <br>
             <!-- Include Feather Icons -->
             <script src="https://unpkg.com/feather-icons"></script>
             <script>
@@ -734,15 +732,39 @@
 
 
     function toggleCart() {
-        // Create an array from the values of params
-        dispaycard()
+
+        dispaycard();
+
+        const currentDate = new Date().toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata"
+        });
+
+        console.log('Current Date and Time in Asia/Kolkata:', currentDate);
 
         const cartItems = Object.values(params);
 
         console.log('Cart Items:', cartItems);
+
+        const reqTime = new Date();
+        const formattedReqDate = reqTime.toLocaleDateString("en-IN", {
+            timeZone: "Asia/Kolkata"
+        });
+        const formattedReqTime = reqTime.toLocaleTimeString("en-IN", {
+            timeZone: "Asia/Kolkata",
+            hour12: false
+        });
+
+        const reqDateTime = `${formattedReqDate}, ${formattedReqTime}`;
+
+        reqTime.setMonth(reqTime.getMonth() + 1);
+        const formattedExpDate = reqTime.toLocaleDateString("en-IN", {
+            timeZone: "Asia/Kolkata"
+        });
+
+
+        document.getElementById('req_time').textContent = reqDateTime;
+        document.getElementById('exp_time').textContent = formattedExpDate;
     }
-
-
 
     function dispaycard() {
 
@@ -758,6 +780,102 @@
 
             main.classList.remove('hidden');
             dispaycard.classList.add('hidden');
+        }
+    }
+
+
+    function submitForm() {
+        const reqTime = document.getElementById('req_time').textContent;
+        const expTime = document.getElementById('exp_time').textContent;
+
+
+        const cartItems = Object.values(params);
+
+        const rollNo = document.getElementById('check_roll_no').value;
+        const formData = {
+            rollNo: rollNo,
+            requestingDate: reqTime,
+            // expiresDate: expTime,
+            components: cartItems.map(item => ({
+                productName: item.productName,
+                quantity: item.quantity
+            }))
+        };
+
+        console.log("Order Confirmation Details:", formData);
+
+    }
+</script>
+
+
+<script>
+    async function checkrollno() {
+        const rollNo = document.getElementById('check_roll_no').value;
+        console.log("Roll No:", rollNo);
+
+        const errorDiv = document.getElementById('errorname');
+
+
+        const userNameDiv = document.getElementById('userNameDiv');
+        const userPhoneDiv = document.getElementById('userPhoneDiv');
+        const userFacultyDiv = document.getElementById('userFacultyDiv');
+        const acknowledgmentDiv = document.getElementById('acknowledgmentDiv');
+        const saveButton = document.getElementById('saveButton');
+
+        errorDiv.textContent = "";
+
+
+        if (!rollNo || isNaN(rollNo.trim())) {
+            errorDiv.textContent = "Please enter a valid roll number.";
+            return;
+        }
+
+
+        userNameDiv.classList.add('hidden');
+        userPhoneDiv.classList.add('hidden');
+        userFacultyDiv.classList.add('hidden');
+        acknowledgmentDiv.classList.add('hidden');
+        saveButton.classList.add('hidden');
+
+        try {
+            const response = await fetch('http://localhost:3002/api/userpage/usercheck', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    roll_no: rollNo
+                })
+            });
+
+
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(`Error ${response.status}: ${errorMessage}`);
+            }
+
+
+            const data = await response.json();
+            console.log('API Response:', data);
+
+
+            if (!data.success) {
+                errorDiv.textContent = data.message || "User not found";
+            } else {
+
+                document.getElementById('display_name').textContent = data.user.name;
+                document.getElementById('display_roll_no').textContent = data.user.phone;
+                document.getElementById('display_faculty').textContent = data.user.is_faculty === 1 ? 'Faculty' : 'Student';
+
+                userNameDiv.classList.remove('hidden');
+                userPhoneDiv.classList.remove('hidden');
+                userFacultyDiv.classList.remove('hidden');
+                acknowledgmentDiv.classList.remove('hidden');
+                saveButton.classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            errorDiv.textContent = "User not found.";
         }
     }
 </script>
