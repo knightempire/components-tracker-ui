@@ -369,20 +369,28 @@
                         <br><br>
 
                         <!-- Issue Details Form -->
-                        <div class="mt-6 md:mt-10 text-left font-bold text-3xl font-bold md:text-xl">Profile</div>
+                        <div class="mt-6 md:mt-10 text-left font-bold text-3xl font-bold md:text-xl">Faculty Details </div>
                         <div class="grid grid-cols-1 md:grid-cols-2  mt-4 lg:grid-cols-3 gap-6">
 
 
 
 
                             <div class="flex flex-col">
-                                <label class="font-semibold text-gray-700">Roll no</label>
+                                <label class="font-semibold text-gray-700">Faculty Name</label>
                                 <div class="flex items-center">
-                                    <input type="text" id="check_roll_no" class="p-2 border rounded text-gray-600 w-2/3" placeholder="Enter Roll No">
-                                    <button type="button" class="cursor-pointer rounded-lg bg-sky-400 px-6 py-2 sm:py-3 text-md font-semibold text-white ml-4" id="checkuser" onclick="checkrollno()">Check user</button>
+                                    <select id="check_roll_no" class="p-2 py-2  border rounded text-gray-600 w-2/3 border-black">
+                                        <option value="">Select Faculty</option>
+                                        <option value="faculty1">Faculty 1</option>
+                                        <option value="faculty2">Faculty 2</option>
+                                        <option value="faculty3">Faculty 3</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                    
+                                    <!-- <button type="button" class="cursor-pointer rounded-lg bg-sky-400 px-6 py-2 sm:py-3 text-md font-semibold text-white ml-4" id="checkuser" >Check user</button>
+                               -->
                                 </div>
-                                <div id="errorname" class="mt-1 text-left text-red-600"></div>
                             </div>
+                            
 
                             <br>
 
@@ -801,74 +809,3 @@
 </script>
 
 
-<script>
-    async function checkrollno() {
-        const rollNo = document.getElementById('check_roll_no').value;
-        console.log("Roll No:", rollNo);
-
-        const errorDiv = document.getElementById('errorname');
-
-
-        const userNameDiv = document.getElementById('userNameDiv');
-        const userPhoneDiv = document.getElementById('userPhoneDiv');
-        const userFacultyDiv = document.getElementById('userFacultyDiv');
-        const acknowledgmentDiv = document.getElementById('acknowledgmentDiv');
-        const saveButton = document.getElementById('saveButton');
-
-        errorDiv.textContent = "";
-
-
-        if (!rollNo || isNaN(rollNo.trim())) {
-            errorDiv.textContent = "Please enter a valid roll number.";
-            return;
-        }
-
-
-        userNameDiv.classList.add('hidden');
-        userPhoneDiv.classList.add('hidden');
-        userFacultyDiv.classList.add('hidden');
-        acknowledgmentDiv.classList.add('hidden');
-        saveButton.classList.add('hidden');
-
-        try {
-            const response = await fetch('http://localhost:3002/api/userpage/usercheck', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    roll_no: rollNo
-                })
-            });
-
-
-            if (!response.ok) {
-                const errorMessage = await response.text();
-                throw new Error(`Error ${response.status}: ${errorMessage}`);
-            }
-
-
-            const data = await response.json();
-            console.log('API Response:', data);
-
-
-            if (!data.success) {
-                errorDiv.textContent = data.message || "User not found";
-            } else {
-
-                document.getElementById('display_name').textContent = data.user.name;
-                document.getElementById('display_roll_no').textContent = data.user.phone;
-                document.getElementById('display_faculty').textContent = data.user.is_faculty === 1 ? 'Faculty' : 'Student';
-
-                userNameDiv.classList.remove('hidden');
-                userPhoneDiv.classList.remove('hidden');
-                userFacultyDiv.classList.remove('hidden');
-                acknowledgmentDiv.classList.remove('hidden');
-                saveButton.classList.remove('hidden');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            errorDiv.textContent = "User not found.";
-        }
-    }
-</script>
