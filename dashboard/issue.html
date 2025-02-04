@@ -212,14 +212,98 @@
                                         <!-- Title as a div (stays on the left) -->
                                         <div class="text-3xl font-bold sm:mr-4">Issues list</div>
                                     </div>
-
-                                    <!-- Search Bar (Stacked below on small screens) -->
-                                    <div class="relative sm:w-64 w-full">
-                                        <!-- Feather Search Icon and Input -->
-                                        <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-                                        <input type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search here...">
+                                
+                                    <!-- Flex container for search bar and filter dropdown -->
+                                    <div class="flex items-center space-x-4 sm:w-auto w-full">
+                                             <!-- Filter Dropdown -->
+                                             <div class="relative">
+                                                <button id="filter-button" class="w-full text-gray-700 bg-white border rounded-lg shadow-md px-4 py-2 flex justify-between items-center">
+                                                    <span>Filters</span>
+                                                    <i data-feather="chevron-down" class="text-gray-500"></i>
+                                                    <!-- Display count of selected filters -->
+                                                    <span id="selected-filters-count" class="text-sm text-gray-500 ml-2"></span>
+                                                </button>
+                                                <!-- Dropdown Menu -->
+                                                <div id="filter-dropdown" class="absolute left-0 w-48 mt-2 bg-white shadow-md rounded-lg p-4 hidden z-10">
+                                                    <!-- Issue Status Category -->
+                                                    <div class="mb-4">
+                                                        <span class="font-semibold text-sm">Issue Status</span>
+                                                        <div class="flex flex-col">
+                                                            <label class="flex items-center space-x-2">
+                                                                <input type="checkbox" class="text-indigo-500" data-filter="Issued">
+                                                                <span class="text-sm">Issued</span>
+                                                            </label>
+                                                            <label class="flex items-center space-x-2">
+                                                                <input type="checkbox" class="text-indigo-500" data-filter="Declined">
+                                                                <span class="text-sm">Declined</span>
+                                                            </label>
+                                                            <label class="flex items-center space-x-2">
+                                                                <input type="checkbox" class="text-indigo-500" data-filter="Pending">
+                                                                <span class="text-sm">Pending</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                    
+                                                    <!-- Return Status Category -->
+                                                    <div>
+                                                        <span class="font-semibold text-sm">Return Status</span>
+                                                        <div class="flex flex-col">
+                                                            <label class="flex items-center space-x-2">
+                                                                <input type="checkbox" class="text-indigo-500" data-filter="Returned">
+                                                                <span class="text-sm">Returned</span>
+                                                            </label>
+                                                            <label class="flex items-center space-x-2">
+                                                                <input type="checkbox" class="text-indigo-500" data-filter="Yet to Return">
+                                                                <span class="text-sm">Yet to Return</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- Search Bar -->
+                                        <div class="relative sm:w-64 w-full">
+                                            <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                                            <input type="search" class="pl-10 pr-4 py-2 border border-black rounded-lg shadow-none focus:outline-none w-full" placeholder="Search here...">
+                                        </div>
+                                
+                                   
                                     </div>
                                 </div>
+                                
+                                <!-- Add some JavaScript to toggle dropdown visibility and update the selected filter count -->
+                                <script>
+                                    const filterButton = document.getElementById('filter-button');
+                                    const dropdown = document.getElementById('filter-dropdown');
+                                    const selectedFiltersCountSpan = document.getElementById('selected-filters-count');
+                                    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                                
+                                    filterButton.addEventListener('click', function() {
+                                        dropdown.classList.toggle('hidden');
+                                    });
+                                
+                                    // Function to update the selected filter count
+                                    function updateSelectedFilterCount() {
+                                        let selectedCount = 0;
+                                        checkboxes.forEach(checkbox => {
+                                            if (checkbox.checked) {
+                                                selectedCount++;
+                                            }
+                                        });
+                                
+                                        // Display the count in the button
+                                        if (selectedCount > 0) {
+                                            selectedFiltersCountSpan.textContent = `(${selectedCount})`;
+                                        } else {
+                                            selectedFiltersCountSpan.textContent = '';  // No filters selected
+                                        }
+                                    }
+                                
+                                    // Event listener for checkboxes to update the filter count on change
+                                    checkboxes.forEach(checkbox => {
+                                        checkbox.addEventListener('change', updateSelectedFilterCount);
+                                    });
+                                </script>
+                                
 
                                 <div class="card-body">
                                     <!-- Add a wrapper div to make the table scrollable on smaller screens -->
